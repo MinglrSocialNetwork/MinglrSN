@@ -1,0 +1,28 @@
+---
+env:
+  variables:
+  parameter-store:
+
+phases:
+  install:
+    runtime-versions:
+      java: 
+    commands:
+  pre_build:
+    commands:
+  build:
+    commands:
+  post_build:
+    commands:
+
+reports:
+  arn:
+    files:
+    base-directory:
+    discard-paths:
+    file-format:
+    
+artifacts:
+  files:
+  discard-paths:
+  

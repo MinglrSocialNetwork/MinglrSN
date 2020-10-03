@@ -1,11 +1,16 @@
 package com.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 @Table(name = "user_table")
@@ -27,7 +32,10 @@ public class User {
 	
 	@Column(name = "last_name")
 	private String lastName;
-
+	
+//	@OneToMany(mappedBy="user_table", fetch = FetchType.LAZY)
+//	private List<Posts> post;
+	
 	public User() {
 		super();
 	}

@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" #userform="ngForm">
+<form (ngSubmit)="onSubmit()" #registration="ngForm">
     <div class="login-wrap">
         <div class="login-html">
            <div class="title">
@@ -47,7 +47,7 @@
                     
                     <div class="group">
                         <button type="submit" class="button" 
-                        [disabled]="!passwordVal || !usernameVal ||!userform.form.valid">
+                        [disabled]="!passwordVal || !usernameVal ||!registration.form.valid">
                             Create Account</button>
                     </div>
                     <div class="hr"></div>

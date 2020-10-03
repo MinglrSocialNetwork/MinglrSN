@@ -11,7 +11,7 @@ import { UserService } from '../service/user.service';
 export class RegistrationComponent implements OnInit {
 
   constructor(private userService: UserService) { }
-  @ViewChild('userform') userform:any;
+  @ViewChild('registration') registration:any;
 
   test = '';
   password = '';
@@ -57,12 +57,12 @@ export class RegistrationComponent implements OnInit {
   onSubmit(){
     console.log("in onSubmit");
     console.log("usernameVal "+this.usernameVal +" passwordVal "+ this.passwordVal);
-    this.userService.addUser(this.userform.value).subscribe(data =>{
+    this.userService.addUser(this.registration.value).subscribe(data =>{
       this.existingUsers = data;
       console.log(this.existingUsers)
     });
     console.log("out of onSubmit");
-    this.userform.reset();  
+    this.registration.reset();  
   }
 
   ngOnInit(): void {

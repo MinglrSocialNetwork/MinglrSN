@@ -1,1 +1,10 @@
-<p>registration works!</p>
+<form (ngSubmit)="onSubmit()" #userform="ngForm">
+    <input type="text" name="username" placeholder="Username" [ngModel]="username" (ngModelChange)="getUsername($event)" required>
+    <input type="text" name="password" placeholder="Password" [ngModel]="password" (ngModelChange)="getPassword($event)" required>
+    <h3>{{password}}</h3>
+    <input type="text" name="confirmPassword" placeholder="ConfirmPassword" [ngModel]="test" (ngModelChange)="onChange($event)" required>
+    <input type="text" name="firsName" placeholder="First Name" ngModel required>
+    <input type="text" name="lastName" placeholder="Last Name"  ngModel required>
+
+    <button type="submit" [disabled]="!userform.form.valid">Create Account</button>
+</form>

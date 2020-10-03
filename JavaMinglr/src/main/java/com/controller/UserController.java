@@ -24,11 +24,7 @@ public class UserController {
 	
 	@PostMapping(value = "/createUser")
 	public @ResponseBody String createUser(@RequestBody User user) {
-		
-		System.out.println("Inside put");
-		
-		userRepo.insertUser(user);
-		
+		System.out.println(user);
 		return "Oh yea!!";
 	}
 	

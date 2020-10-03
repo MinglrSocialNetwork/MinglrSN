@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,10 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { GlobalfeedComponent } from './globalfeed/globalfeed.component';
 import { CommentComponent } from './comment/comment.component';
 import { SearchComponent } from './search/search.component';
+
+import {RouterModule} from "@angular/router";
+
+
 
 @NgModule({
   declarations: [
@@ -25,9 +30,12 @@ import { SearchComponent } from './search/search.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    RouterModule
   ],
   providers: [AjaxService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

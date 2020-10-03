@@ -1,1 +1,36 @@
-<p>login works!</p>
+<form (ngSubmit)="onSubmit()" #userform="ngForm" >
+  <div class="login-wrap">
+      <div class="login-html">
+         <div class="title">
+              -- Minglr login --
+          </div>
+        <input id="tab-1" type="radio" name="tab" class="sign-in" checked disabled>
+        <label for="tab-1" class="tab">Sign In</label>
+        
+        <input id="tab-2" type="radio" name="tab" class="sign-up">
+        <label for="tab-2" class="tab"><a routerLink="/register">Sign Up</a></label>
+        
+        <div class="login-form">
+          <div class="sign-in-htm">
+            <br>  
+            <div class="group">
+              <input type="text" class="input" name="username" placeholder="Username"
+              [ngModel]="username" (ngModelChange)="getUsername($event)" required>
+            </div>
+            <br>
+            <div class="group">
+              <input type="password" class="input" name="password" placeholder="Password" 
+              [ngModel]="password" (ngModelChange)="getPassword($event)" required>
+            </div>
+            <br>
+            <div class="group">
+              <input type="submit" class="button" value="Sign In">
+            </div>
+            <div class="hr"></div>
+          </div>
+        </div>
+      </div>
+  </div>
+</form>
+<router-outlet ></router-outlet>
+

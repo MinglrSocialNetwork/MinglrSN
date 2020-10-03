@@ -11,6 +11,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { GlobalfeedComponent } from './globalfeed/globalfeed.component';
 import { CommentComponent } from './comment/comment.component';
 import { SearchComponent } from './search/search.component';
+import { PostTempComponent } from './post-temp/post-temp.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { SearchComponent } from './search/search.component';
     NavigationComponent,
     GlobalfeedComponent,
     CommentComponent,
-    SearchComponent
+    SearchComponent,
+    PostTempComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [AjaxService],
   bootstrap: [AppComponent]

@@ -1,0 +1,34 @@
+<div class="container">
+
+    <!-- # creates a reference variable -->
+    <form (ngSubmit)="onSubmit()" #textPostForm="ngForm" style="width:30rem;">
+        <div class="form-group">
+            <textarea class="form-control" name='postBody' id="postBody" rows="3" placeholder="Ready to mingle? Create a post here!" ngModel required></textarea> <!-- plus ngModel? -->
+        </div> 
+        <div class="form-group"> 
+            <button [disabled]="!textPostForm.form.valid" class="btn btn-primary" type='submit'>Post it!</button>
+            <input type='hidden' name='date'>
+            <input type='hidden' name='userId'>
+        </div> 
+    </form>
+
+    
+    <div *ngFor='let post of postList'>
+        <div class="card" style="width: 30rem;">
+            <div class="card-body">
+                <!-- <div class="card-header">{{post["username"]}}</div> -->
+              <h5 class="card-title">{{post["username"]}}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{today | date:'shortDate'}} at {{today | date:'shortTime'}}</h6>
+              <p class="card-text">{{post["body"]}}</p>
+            </div>
+          </div>
+    </div>
+
+
+    <div *ngFor='let post of postList' class="card" style="width: 30rem;">
+        <div class="card-header">{{post["username"]}}_{{post["date"]}}</div>
+        <div class="card-body">
+          <p class="card-text">{{post["body"]}}</p>
+        </div>
+    </div>
+</div>

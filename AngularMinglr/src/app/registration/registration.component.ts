@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { UserService } from '../service/user.service';
 
 
@@ -61,7 +60,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit(){
     console.log("in onSubmit");
     console.log("usernameVal "+this.usernameVal +" passwordVal "+ this.passwordVal);
-    this.userService.addUser(this.registration.value).subscrigitbe(data =>{
+    this.userService.addUser(this.registration.value).subscribe(data =>{
       this.existingUsers = data;
       console.log(this.existingUsers)
     });
@@ -72,7 +71,6 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(data =>{
       this.existingUsers = data;
-      console.log(this.existingUsers)
     });
   }
 

@@ -25,6 +25,7 @@ public class UserController {
 	@PostMapping(value = "/createUser")
 	public @ResponseBody String createUser(@RequestBody User user) {
 		System.out.println(user);
+		//userRepo.insertUser(user);
 		return "Oh yea!!";
 	}
 	
@@ -32,7 +33,6 @@ public class UserController {
 	public @ResponseBody List<User> getAllUsers(){
 		List<User> allUsers = userRepo.selectAllUsers();
 		return allUsers;
-	}
-	
+	}	
 	
 }

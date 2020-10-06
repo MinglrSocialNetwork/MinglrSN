@@ -39,6 +39,7 @@ export class RegistrationComponent implements OnInit {
   getUsername(name){
     this.username = name;
     console.log(this.username);
+    if(this.existingUsers.length != 0){
     for(var i=0; i < this.existingUsers.length; i++){
       if(this.username == this.existingUsers[i].userName){
         this.usernameVal = false;
@@ -47,6 +48,9 @@ export class RegistrationComponent implements OnInit {
       }else{
         this.usernameVal = true;
       }
+    }
+    }else{
+      this.usernameVal = true;
     }
   }
 

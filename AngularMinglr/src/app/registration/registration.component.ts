@@ -61,7 +61,7 @@ export class RegistrationComponent implements OnInit {
   onSubmit(){
     console.log("in onSubmit");
     console.log("usernameVal "+this.usernameVal +" passwordVal "+ this.passwordVal);
-    this.userService.addUser(this.registration.value).subscribe(data =>{
+    this.userService.addUser(this.registration.value).subscrigitbe(data =>{
       this.existingUsers = data;
       console.log(this.existingUsers)
     });

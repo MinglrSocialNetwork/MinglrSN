@@ -1,6 +1,6 @@
 
 import { DatePipe } from '@angular/common';
-import { ViewChild } from '@angular/core';
+import { Input, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -21,12 +21,16 @@ export class PostTempComponent implements OnInit {
     'userId': 12
   }
 
-  postList: Object[] = [
-   
-  ]
 
+  postList: Object[] = []
   
 
+    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"},
+    // {"userID": "javyduty", "postText": "I see trees of green, red roses too"}
+   
+  // ]
+
+  
 
   @ViewChild('textPostForm') textPostForm: any;
 
@@ -36,14 +40,7 @@ export class PostTempComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.postService.getPosts().subscribe((data) => 
-      {
-        for (let item of data) {
-          console.log(item["postText"]);
-          this.postList.push(item);
-        }
-      }
-    )
+    this.loadPosts();
   }
   
   
@@ -52,17 +49,31 @@ export class PostTempComponent implements OnInit {
 
       // let postDate: number = Date.now();
       // this.textPostForm.value.date = postDate;
-
+      // this.textPostForm.value.username = this.currentUser['username'];
       this.textPostForm.value.userID = this.currentUser['userId'];
       this.textPostForm.value.upvote = 0;
       this.textPostForm.value.downvote = 0;
-
         this.postService.createTextPost(this.textPostForm.value).subscribe();
         this.textPostForm.reset();
     }
-}
-  
-  
+  }
+
+  deletePost(post: any){
+    this.postService.deletePost(post).subscribe();
+  }
+
+  loadPosts(): void {
+    this.postService.getPosts().subscribe((data) => 
+    {
+      if (data.length > 0) {
+        for (let item of data) {
+          this.postList.unshift(item);
+        }
+      }
+    })
+
+  }
+ 
   // Need to import FormsModule in app.module.ts to take advantage of NGFORM
   // BUILT-IN NGFORM METHODS
   // myform.value: It will provides you with the aggregated form value of all the fields used in your <form> tag,

@@ -36,7 +36,7 @@ public class PostRepoImpl implements PostRepo {
 	}
 
 	@Override
-	public Posts updatePost(Posts post, int postid) {
+	public Posts updatePost(int postid , Posts post) {
 	System.out.println("Updating post...");
 		
 		Posts currentPosts = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
@@ -47,28 +47,31 @@ public class PostRepoImpl implements PostRepo {
 		sesFact.getCurrentSession().merge(post);
 		Posts updatedPosts = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
 		sesFact.getCurrentSession().flush();
-		sesFact.getCurrentSession().close();
 		
 		return updatedPosts;
 	}
 
-	@Override
-	public Posts selectByPostId(int postid) {
-	System.out.println("retrieving selected post...");
-	
-		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
-		sesFact.getCurrentSession().close();
-	
-		return post;
-	}
+//	@Override
+//	public Posts selectByPostId(int postid) {
+//	System.out.println("retrieving selected post...");
+//	
+//		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+//		sesFact.getCurrentSession().close();
+//	
+//		return post;
+//	}
 
 	@Override
 	public void deletePost(int postid) {
-	System.out.println("starting to delete post..");
 	
 		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		System.out.println(post);
+		
 		sesFact.getCurrentSession().delete(post);
-		sesFact.getCurrentSession().close();
+		sesFact.getCurrentSession().flush();
+//		sesFact.getCurrentSession().close();
+		
+		System.out.println("OVA");
 	
 		
 	}
@@ -86,14 +89,7 @@ public class PostRepoImpl implements PostRepo {
 	}
 
 
-	
-	
-//	public static void main(String[] args) {
-//		PostRepoImpl PRI = new PostRepoImpl();
-//		Posts p = new Posts( "1",  2, 3,  5, "right there");
-//		PRI.createPost(p);
-		
-	//}
+
 }
 	
 

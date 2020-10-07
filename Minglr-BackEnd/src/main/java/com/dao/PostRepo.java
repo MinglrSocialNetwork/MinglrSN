@@ -13,9 +13,9 @@ public interface PostRepo {
 	
 	public void createPost(Posts post);
 	
-	public Posts updatePost(Posts post, int postid); //Will probably need to change 
+	public Posts updatePost(int postid, Posts post); //Will probably need to change 
 	
-	public Posts selectByPostId(int postid);
+	//public Posts selectByPostId(int postid);
 	
 	public void deletePost(int postid);
 	

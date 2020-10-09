@@ -1,0 +1,14 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th>Post History</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let temp of post">
+        <div class="col-sm">
+            <td>{{temp.postText}}</td>
+        </div>
+      </tr>
+    </tbody>
+  </table>

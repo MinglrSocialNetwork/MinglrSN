@@ -1,0 +1,43 @@
+<div class="bg-img">
+<div class="container">
+
+    <!-- # creates a reference variable -->
+    <form (ngSubmit)="onSubmit()" #textPostForm="ngForm" enctype="multipart/form-data" style="width: 70%;" class='centerPlusMBottom'>
+        <div class="form-group">
+            <textarea class="form-control" name='postText' id="postText" rows="3" placeholder="Ready to mingle? Create a post here!" maxlength='6000' ngModel required></textarea> <!-- ngModel declares this field as an ngForm value -->
+        </div> 
+        <div class="form-group">
+            <p id="label">Attach an image</p>
+            <input type="file" name="image" id="image" ngModel>
+            <button [disabled]='!textPostForm.form.valid' class="btn btn-dark" type='submit' id="submit">Post it!</button>
+        </div> 
+    </form>
+
+   
+    <div *ngFor='let post of postList'>
+        <div class="card centerPlusMTop contentBox" style="width: 70%;"> 
+            <div class="card-body">
+                <div class='row'>
+                    <h5 class="card-title col">{{post["userID"]}}</h5>
+                    <i class="fas fa-pencil-alt" id="editButton" title='edit post'></i>
+                    <button id='deleteButton' (click)='deletePost(post)' title='Delete this post?'>
+                        <p class='deletePost col'>X</p>
+                    </button>
+                </div>
+                <h6 class="card-subtitle mb-2 text-muted">{{today | date:'shortDate'}} at {{today | date:'shortTime'}}</h6>
+                <p class="card-text">{{post["postText"]}}</p>
+                <div class='row'>
+                    <div class='triangle-up' title='upvote' (click)='upvotePost(post)'> </div>
+                    <div class='triangle-down' title='downvote' (click)='downvotePost(post)'></div>   
+                </div>
+                <div class="row">
+                    <p id='voteNum1'>{{post["upvote"]}}</p>
+                    <p id='voteNum2'>{{post["downvote"]}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

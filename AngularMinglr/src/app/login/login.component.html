@@ -1,1 +1,35 @@
-<p>login works!</p>
+<div class="login-wrap">
+  <div class="login-html">
+     <div class="title">
+          -- Minglr --
+      </div>
+    <input id="tab-1" type="radio" name="tab" class="sign-in" checked disabled>
+      <label for="tab-1" class="tab">Sign In</label>
+    <input id="tab-2" type="radio" name="tab" class="sign-up">
+      <label for="tab-2" class="tab"><a routerLink="/register">Sign Up</a></label>
+    <div class="login-form">
+      <div class="sign-in-htm">
+        <br>  
+          <form class="form-signin" [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="group">
+                  <label class="label">Username</label>
+                  <input formControlName="username" id="user" type="text" class="input" >
+              </div>
+              <br>
+              <div class="group">
+                  <label class="label">Password</label>
+                  <input formControlName="password" id="pass" type="password" class="input" data-type="password" >
+              </div>
+              <br>
+              <div class="group">
+                  <input type="submit" class="button" value="Sign In">
+                  <div  class="alert alert-danger" *ngIf ="incorrect">
+                    Incorrect Username/Password
+                </div>
+              </div>
+              <div class="hr"></div>
+          </form>    
+      </div>
+    </div>
+  </div>
+</div> 

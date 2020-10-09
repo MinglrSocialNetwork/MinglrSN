@@ -22,7 +22,7 @@ import com.models.Posts;
 
 @Controller("PostController")
 @RequestMapping(value = "/post")
-@CrossOrigin(origins = "*") //will change 
+@CrossOrigin(origins = "http://localhost:4200") //will change 
 public class PostController {
 	
 	@Autowired

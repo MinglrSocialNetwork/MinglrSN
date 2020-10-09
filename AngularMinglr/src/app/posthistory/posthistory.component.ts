@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../service/post.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-posthistory',
@@ -7,23 +8,26 @@ import { PostService } from '../service/post.service';
   styleUrls: ['./posthistory.component.css']
 })
 export class PosthistoryComponent implements OnInit {
-  
-  
-  currentUser: Object = {
-    'userId': 12 //This will hold current session userID.
-  }
+  currentUser;
 
   post = [];
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService,
+              private userService: UserService) { }
 
-  ngOnInit(): void {
+  loadPosts() {
+       this.userService.getUser().subscribe(data=>{
+      this.currentUser = data;
+    })
     this.postService.getPosts().subscribe(data => {
      for(let item of data) {
-        if(item["userID"] == this.currentUser['userId']) {
+        if(item.userID == this.currentUser["id"]) {
           this.post.push(item);
         }
      }
     });
+  }
+  
+  ngOnInit(): void {
   }
 
 }

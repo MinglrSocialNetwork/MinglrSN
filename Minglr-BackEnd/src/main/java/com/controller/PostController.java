@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dao.PostRepo;
+import com.models.Friend;
 import com.models.Posts;
 
 @Controller("PostController")
@@ -28,8 +29,12 @@ public class PostController {
 	@Autowired
 	private PostRepo postRepo;
 	
+	@GetMapping(value ="/getPosts/{userid}")
+	public @ResponseBody List<Posts> getFriends(@PathVariable String userid) {
+		return postRepo.selectPostsbyUserId(userid);
+		
+	}
 	
-
 	
 	@GetMapping(value = "/selectAllPosts", produces="application/json")
 	public @ResponseBody List<Posts> selectAllPosts(){

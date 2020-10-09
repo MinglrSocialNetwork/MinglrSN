@@ -14,6 +14,10 @@ export class PostService {
   getPosts(): Observable<any[]> {
     return this.http.get<any[]>(this.url + 'selectAllPosts');
   }
+
+  getPostsbyId(user): Observable<any[]> {
+    return this.http.get<any[]>(this.url + 'getPosts/'+ user);
+  }
   
   createTextPost(data: any){
     return this.http.post(this.url + 'createPost', data);

@@ -14,12 +14,8 @@ export class FriendService {
 
   }
 
-  addFriend(userID:number , friendID: number): Observable<any> {
-    const pair = {
-      "key": 0,
-      "userId": userID,
-      "friend": friendID
-    }
+  addFriend(pair): Observable<any> {
+    console.log(pair);
     return this.friendClient.post("http://localhost:8080/Minglr/friend/addFriend",pair);
   }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.models.Friend;
 import com.models.Posts;
 
 @Transactional
@@ -17,6 +18,13 @@ public class PostRepoImpl implements PostRepo {
 	@Autowired
 	private SessionFactory sesFact;
 
+	
+	@Override
+	public List<Posts> selectPostsbyUserId(String userid) {
+		List<Posts> posts = (List<Posts>) sesFact.getCurrentSession().createQuery("from Posts where userId = '" + userid + "'",Posts.class).list();
+		return posts;
+	}
+	
 	@Override
 	public List<Posts> selectAllPosts() {
 	System.out.println("getting all posts..");

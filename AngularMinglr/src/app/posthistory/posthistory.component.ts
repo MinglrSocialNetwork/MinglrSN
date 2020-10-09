@@ -15,19 +15,18 @@ export class PosthistoryComponent implements OnInit {
               private userService: UserService) { }
 
   loadPosts() {
-       this.userService.getUser().subscribe(data=>{
-      this.currentUser = data;
-    })
-    this.postService.getPosts().subscribe(data => {
+
+    this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
      for(let item of data) {
-        if(item.userID == this.currentUser["id"]) {
           this.post.push(item);
-        }
      }
     });
   }
   
   ngOnInit(): void {
+         this.userService.getUser().subscribe(data=>{
+      this.currentUser = data;
+    })
   }
 
 }

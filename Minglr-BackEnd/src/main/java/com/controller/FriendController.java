@@ -28,11 +28,12 @@ public class FriendController {
 		return friendRepo.getFriends(userid);
 		
 	}
-	// , consumes="application/json", produces="application/json"
+	
 	@PostMapping(value="/addFriend")
-	public void addFriend(@RequestBody Friend friend) {
+	public @ResponseBody String addFriend(@RequestBody Friend friend) {
 		System.out.println(friend);
 		friendRepo.addFriend(friend);
+		return "";
 	}
 	
 	

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonalpageComponent } from '../personalpage/personalpage.component';
 import { PostService } from '../service/post.service';
 import { UserService } from '../service/user.service';
 
@@ -12,7 +13,8 @@ export class PosthistoryComponent implements OnInit {
 
   post = [];
   constructor(private postService: PostService,
-              private userService: UserService) { }
+              private userService: UserService,
+              private personalpage: PersonalpageComponent) { }
 
   loadPosts() {
 

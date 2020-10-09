@@ -22,5 +22,10 @@ export class PostService {
   createTextPost(data: any){
     return this.http.post(this.url + 'createPost', data);
   }
+
+  deletePost(post: any) {
+    let id: number = post["id"];
+    return this.http.delete(this.url + 'posts/deletePost/' + id, post);
+  }
   
 }

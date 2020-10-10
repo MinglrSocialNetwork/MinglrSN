@@ -32,4 +32,8 @@ export class PostService {
     return this.http.delete(this.url + 'posts/deletePost/' + id, post);
   }
   
+  updatePost(post: any) {
+    let id: number = post["id"];
+    return this.http.put(this.url + 'posts/updatePost/' + id, post);
+  }
 }

@@ -18,6 +18,9 @@ export class GlobalfeedComponent implements OnInit {
 
   postList: Object[] = [];
   createdPost: Object;
+  editModePostId: number = -1;
+  editedPostText: string;
+
   selectedFile: File = null;
   retrievedImage: any;
   base64Data: any;
@@ -26,7 +29,7 @@ export class GlobalfeedComponent implements OnInit {
 
   currentUser: Object = {
     'username': 'javyduty',
-    'userId': 12
+    'id': 12
   }
 
   @ViewChild('textPostForm') textPostForm: any;
@@ -102,6 +105,22 @@ export class GlobalfeedComponent implements OnInit {
         this.postList = tempList;
       }
     })
+  }
+
+  editMode(post: Object) {
+    this.editModePostId = post['id'];
+    this.editedPostText = post['postText'];
+  }
+
+  editPost(post: Object) {
+    post['postText'] = this.editedPostText;
+    this.postService.updatePost(post).subscribe();
+
+    this.editModePostId = -1;
+  }
+
+  cancelEdit() {
+    this.editModePostId = -1;
   }
 
   //Called when a user attaches an image

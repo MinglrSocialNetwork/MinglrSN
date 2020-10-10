@@ -30,7 +30,7 @@ public class PostController {
 	private PostRepo postRepo;
 	
 	@GetMapping(value ="/getPosts/{userid}")
-	public @ResponseBody List<Posts> getFriends(@PathVariable String userid) {
+	public @ResponseBody List<Posts> getPostsbyId(@PathVariable String userid) {
 		return postRepo.selectPostsbyUserId(userid);
 		
 	}

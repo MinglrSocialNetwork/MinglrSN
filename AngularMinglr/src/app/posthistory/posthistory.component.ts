@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonalpageComponent } from '../personalpage/personalpage.component';
 import { PostService } from '../service/post.service';
 import { UserService } from '../service/user.service';
 
@@ -9,26 +8,26 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./posthistory.component.css']
 })
 export class PosthistoryComponent implements OnInit {
+  
+  
   currentUser;
 
   post = [];
   constructor(private postService: PostService,
-              private userService: UserService,
-              private personalpage: PersonalpageComponent) { }
+              private userService: UserService) { }
 
   loadPosts() {
-
-    this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
+        this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
      for(let item of data) {
           this.post.push(item);
      }
+     console.log(data);
     });
   }
   
+
   ngOnInit(): void {
-         this.userService.getUser().subscribe(data=>{
+    this.userService.getUser().subscribe(data=> {
       this.currentUser = data;
     })
   }
-
-}

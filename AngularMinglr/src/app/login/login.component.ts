@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
               && this.loginFormParams.password.value == this.existingUsers[i].password  ){
                
                 this.userService.loginUser(this.existingUsers[i]).subscribe();
+                console.log(this.existingUsers[i]);
                 this.router.navigateByUrl('/personalpage');
         }else{
           this.incorrect=true;

@@ -23,6 +23,8 @@ export class GlobalfeedComponent implements OnInit {
 
 
   postList: Object[] = [];
+
+  createdPost: Object;
   
 
   @ViewChild('textPostForm') textPostForm: any;
@@ -48,9 +50,13 @@ export class GlobalfeedComponent implements OnInit {
       this.textPostForm.value.image = null; 
       this.textPostForm.value.imageExtension = null;
       this.postService.createTextPost(this.textPostForm.value).subscribe();
+
+      this.createdPost = {"userID": this.currentUser['userId'], "id": this.currentUser['username'], "upvote": 0, "downvote": 0,
+      "postText": this.textPostForm.value.postText, "image": this.textPostForm.value.image, "imageExtension": this.textPostForm.value.imageExtension};
+
       this.textPostForm.reset();
     }
-    setTimeout(() => this.loadPosts(), 300);
+    this.postList.unshift(this.createdPost);
   }
 
   deletePost(post: any){

@@ -75,10 +75,15 @@ export class GlobalfeedComponent implements OnInit {
   }
 
   deletePost(post: any){
-    this.postService.deletePost(post).subscribe();
+    if(confirm("Are you sure you want to delete this post?")){
 
-    const deletedPost = this.postList.find(x => x["id"] === post["id"]);
-    this.postList.splice(this.postList.indexOf(deletedPost), 1);
+      //delete post from db
+      this.postService.deletePost(post).subscribe();
+
+      //remove post from local post list to update global feed
+      const deletedPost = this.postList.find(x => x["id"] === post["id"]);
+      this.postList.splice(this.postList.indexOf(deletedPost), 1);
+    }
   }
 
   //Called on startup to load posts from the db

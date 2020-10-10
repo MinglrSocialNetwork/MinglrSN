@@ -14,7 +14,6 @@ import { CommentComponent } from './comment/comment.component';
 import { SearchComponent } from './search/search.component';
 import { PosthistoryComponent } from './posthistory/posthistory.component';
 import { PersonalpageComponent } from './personalpage/personalpage.component';
-import { EditPostComponent } from './edit-post/edit-post.component';
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { EditPostComponent } from './edit-post/edit-post.component';
     SearchComponent,
     PosthistoryComponent,
     PersonalpageComponent,
-    EditPostComponent
   ],
   imports: [
     FormsModule,

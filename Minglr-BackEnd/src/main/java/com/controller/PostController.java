@@ -1,5 +1,6 @@
 package com.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dao.PostRepo;
 import com.models.Posts;
+import com.models.User;
 
 @Controller("PostController")
 @RequestMapping(value = "/post")
@@ -40,14 +44,28 @@ public class PostController {
 		return posts;
 		
 	}
+	
+	@GetMapping(value = "/getUsername/{postid}", produces="application/json")
+	public @ResponseBody User getUsername(@PathVariable int postid){
+		
+		User user = postRepo.getPostUsername(postid);
+//		System.out.println("Retrieving all posts.... " + posts);
+		
+		return user;
+		
+	}
 
 
 	@PostMapping(value = "/createPost")
-	public @ResponseBody String createPost(@RequestBody Posts post ) {
+	public @ResponseBody String createPost(@RequestBody Posts post) throws IOException{
 		
-//		System.out.println("Creating new posts " + post );
-		System.out.println(post.getImage());
+//		System.out.println("Creating new IMAGE post " );
+//		System.out.println(post.getImage());
+		
+//		byte[] img = compressBytes(file.getBytes());	          
+//		post.setImage(img);
 		postRepo.createPost(post);
+//		@RequestParam("image") MultipartFile file 
 		
 		return "";
 		
@@ -82,6 +100,27 @@ public class PostController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	   // compress the image bytes before storing it in the database
+//	    public static byte[] compressBytes(byte[] data) {
+//	        Deflater deflater = new Deflater();
+//	        deflater.setInput(data);
+//	        deflater.finish();
+//	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+//	        byte[] buffer = new byte[1024];
+//	        
+//	        while (!deflater.finished()) {
+//	            int count = deflater.deflate(buffer);
+//	            outputStream.write(buffer, 0, count);
+//	        }
+//	        try {
+//	            outputStream.close();
+//	        } catch (IOException e) {
+//	        }
+//	        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
+//	
+//	        return outputStream.toByteArray();
+//	    }
+//	
 //	public static void main(String[] args) {
 //		
 //		PostController PC = new PostController();

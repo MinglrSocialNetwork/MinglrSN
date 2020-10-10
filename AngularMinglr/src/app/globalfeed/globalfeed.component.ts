@@ -16,20 +16,22 @@ export class GlobalfeedComponent implements OnInit {
   // For testing purposes. Delete later.
   today: number = Date.now();
 
+  postList: Object[] = [];
+  createdPost: Object;
+  selectedFile: File = null;
+  retrievedImage: any;
+  base64Data: any;
+  retrieveResonse: any;
+  message: string;
+
   currentUser: Object = {
     'username': 'javyduty',
     'userId': 12
   }
 
-
-  postList: Object[] = [];
-
-  createdPost: Object;
-  
-
   @ViewChild('textPostForm') textPostForm: any;
 
-  
+
   constructor(private postService: PostService) { }
 
 
@@ -37,10 +39,9 @@ export class GlobalfeedComponent implements OnInit {
     this.loadPosts();
   }
   
-  
+  //Called when user submits a new post
   onSubmit(){
     if(this.textPostForm.valid){
-
       // let postDate: number = Date.now();
       // this.textPostForm.value.date = postDate;
       // this.textPostForm.value.username = this.currentUser['username'];
@@ -49,14 +50,28 @@ export class GlobalfeedComponent implements OnInit {
       this.textPostForm.value.downvote = 0;
       this.textPostForm.value.image = null; 
       this.textPostForm.value.imageExtension = null;
+
+      //get image info if submitted
+      if (this.selectedFile != null){
+        console.log(this.selectedFile);
+
+        this.textPostForm.value.image = this.selectedFile;
+
+        console.log(this.textPostForm.value.image);
+        this.textPostForm.value.imageExtension = this.selectedFile.name;
+        console.log(this.textPostForm.value.imageExtension);
+
+        console.log(this.textPostForm.value);
+
+        // const uploadImageData = new FormData();
+        // uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+
+      }
+
       this.postService.createTextPost(this.textPostForm.value).subscribe();
-
-      this.createdPost = {"userID": this.currentUser['userId'], "id": this.currentUser['username'], "upvote": 0, "downvote": 0,
-      "postText": this.textPostForm.value.postText, "image": this.textPostForm.value.image, "imageExtension": this.textPostForm.value.imageExtension};
-
-      this.textPostForm.reset();
+      setTimeout(() => this.loadPosts(), 300);
     }
-    this.postList.unshift(this.createdPost);
+    this.textPostForm.reset();
   }
 
   deletePost(post: any){
@@ -66,15 +81,28 @@ export class GlobalfeedComponent implements OnInit {
     this.postList.splice(this.postList.indexOf(deletedPost), 1);
   }
 
+  //Called on startup to load posts from the db
   loadPosts(): void {
     this.postService.getPosts().subscribe((data) => 
     {
       if (data.length > 0) {
+        let tempList: Object[] = [];
         for (let item of data) {
-          this.postList.unshift(item);
+          let postId = item["id"];
+          this.postService.getUsername(postId).subscribe((user) => 
+            item["username"] = user["userName"]
+          )
+          tempList.unshift(item);
         }
+        this.postList = tempList;
       }
     })
+  }
+
+  //Called when a user attaches an image
+  public onFileChanged(event) {
+    //Select File
+    this.selectedFile = event.target.files[0];
   }
  
   // Need to import FormsModule in app.module.ts to take advantage of NGFORM

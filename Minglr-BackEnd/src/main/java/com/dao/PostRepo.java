@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.models.Posts;
+import com.models.User;
 
 
 public interface PostRepo {
@@ -22,4 +23,6 @@ public interface PostRepo {
 	public void increaseUpvotes(int postid);
 	
 	public void increaseDownVotes(int postid);
+	
+	public User getPostUsername(int postid);
 }

@@ -2,6 +2,8 @@ package com.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +13,7 @@ public class Friend {
 	
 	@Id
 	@Column(name="primary_key")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int key;
 	
 	@Column(name = "userid")
@@ -20,15 +23,9 @@ public class Friend {
 	private int friendId;
 
 	
-//	public Friend(int key, int userId, int friendId) {
-//		super();
-//		this.key = key;
-//		this.userId = userId;
-//		this.friendId = friendId;
-//	}
-	
-	public Friend(int userId, int friendId) {
+	public Friend(int key, int userId, int friendId) {
 		super();
+		this.key = key;
 		this.userId = userId;
 		this.friendId = friendId;
 	}

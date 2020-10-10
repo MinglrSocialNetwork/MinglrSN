@@ -27,6 +27,11 @@ public class PostRepoImpl implements PostRepo {
 		return posts;
 		
 	}
+	
+	public List<Posts> selectPostsbyUserId(String userid) {
+		List<Posts> posts = (List<Posts>) sesFact.getCurrentSession().createQuery("from Posts where userId = '" + userid + "'",Posts.class).list();
+		return posts;		
+	}
 
 	@Override
 	public void createPost(Posts post) {

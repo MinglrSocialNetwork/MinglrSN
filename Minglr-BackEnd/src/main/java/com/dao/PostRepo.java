@@ -10,6 +10,8 @@ import com.models.User;
 
 public interface PostRepo {
 	
+	public List<Posts> selectPostsbyUserId(String userid);
+	
 	public List<Posts> selectAllPosts();
 	
 	public void createPost(Posts post);

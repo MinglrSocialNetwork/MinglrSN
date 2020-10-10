@@ -29,10 +29,11 @@ public class FriendController {
 		
 	}
 	
-	@PostMapping(path="/addFriend", consumes="application/json", produces="application/json")
-	public void addFriend(@RequestBody Friend friend) {
+	@PostMapping(value="/addFriend")
+	public @ResponseBody String addFriend(@RequestBody Friend friend) {
 		System.out.println(friend);
 		friendRepo.addFriend(friend);
+		return "";
 	}
 	
 	

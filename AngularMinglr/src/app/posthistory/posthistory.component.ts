@@ -8,6 +8,8 @@ import { UserService } from '../service/user.service';
   styleUrls: ['./posthistory.component.css']
 })
 export class PosthistoryComponent implements OnInit {
+  
+  
   currentUser;
 
   post = [];
@@ -15,19 +17,18 @@ export class PosthistoryComponent implements OnInit {
               private userService: UserService) { }
 
   loadPosts() {
-       this.userService.getUser().subscribe(data=>{
-      this.currentUser = data;
-    })
-    this.postService.getPosts().subscribe(data => {
+        this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
      for(let item of data) {
-        if(item.userID == this.currentUser["id"]) {
           this.post.push(item);
-        }
      }
+     console.log(data);
     });
   }
   
-  ngOnInit(): void {
-  }
 
+  ngOnInit(): void {
+    this.userService.getUser().subscribe(data=> {
+      this.currentUser = data;
+    })
+  }
 }

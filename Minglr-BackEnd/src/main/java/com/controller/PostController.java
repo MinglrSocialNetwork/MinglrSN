@@ -32,7 +32,10 @@ public class PostController {
 	@Autowired
 	private PostRepo postRepo;
 	
-	
+	@GetMapping(value= "/getPosts/{userid}")
+	public @ResponseBody List<Posts> getPostbyId(@PathVariable String userid) {
+		return postRepo.selectPostsbyUserId(userid);
+	}
 
 	
 	@GetMapping(value = "/selectAllPosts", produces="application/json")

@@ -11,6 +11,7 @@ import { RegistrationComponent } from './registration/registration.component';
 const routes: Routes = [
   {path:'register', component: RegistrationComponent},
   {path:'login', component: LoginComponent},
+  {path:'logout', component: LoginComponent},
   {path: 'globalfeed', component: GlobalfeedComponent,  canActivate: [AuthGuard]},
   {path: 'personalpage', component: PersonalpageComponent,  canActivate: [AuthGuard]},
   {path: 'navbar', component: NavigationComponent, canActivate: [AuthGuard]},

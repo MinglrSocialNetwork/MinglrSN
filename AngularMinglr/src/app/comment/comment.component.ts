@@ -70,7 +70,7 @@ export class CommentComponent implements OnInit {
   addImage(imageurl){
     this.textCommentForm.value.postId = this.parentPostId;
     this.textCommentForm.value.gifUrl = imageurl;
-    this.textCommentForm.value.commentText =null;
+    this.textCommentForm.value.commentText = null;
     this.commentService.createComment(this.textCommentForm.value).subscribe();
     this.top_10_gifs =[];
     this.textCommentForm.reset();

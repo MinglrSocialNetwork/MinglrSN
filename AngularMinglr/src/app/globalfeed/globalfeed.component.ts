@@ -4,6 +4,7 @@ import { Input, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PostService } from '../service/post.service';
+import { FriendService } from '../service/friend.service';
 
 @Component({
   selector: 'app-globalfeed',
@@ -26,17 +27,18 @@ export class GlobalfeedComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   message: string;
+  friendList = [];
 
   currentUser = JSON.parse(localStorage.getItem('token'));
 
   @ViewChild('textPostForm') textPostForm: any;
 
-
-  constructor(private postService: PostService) { }
-
+  constructor(private postService: PostService, private friendService:FriendService) { }
 
   ngOnInit(): void {
+    console.log(this.currentUser['id']);
     this.loadPosts();
+    this.setFriendList(this.currentUser['id']);
   }
   
   //Called when user submits a new post
@@ -113,6 +115,39 @@ export class GlobalfeedComponent implements OnInit {
     this.postService.updatePost(post).subscribe();
 
     this.editModePostId = -1;
+  }
+
+  adding(friendId){
+    const pair = {
+      "key": 0,
+      "userId": this.currentUser["id"],
+      "friendId": friendId
+    }
+    console.log(friendId);
+    this.friendService.addFriend(pair).subscribe();
+  }
+
+  setFriendList(userID) {
+    this.friendService.getFriends(userID).subscribe(
+       data => {
+         for(let item of data) {
+           this.friendList.push(item);
+         }
+         console.log(this.friendList);
+       });
+  }
+
+  checkFriend(userID) {
+    // Checks if post is from the currentUser
+    if( userID == this.currentUser["id"]) {
+      return false;
+    }
+    // Checks list of friends of current user
+   for(let item of this.friendList) { 
+      if(item["friendId"] == userID) {
+          return false;
+        }
+      } return true;
   }
 
   cancelEdit() {

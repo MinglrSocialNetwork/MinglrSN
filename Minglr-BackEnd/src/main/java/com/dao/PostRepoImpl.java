@@ -36,7 +36,7 @@ public class PostRepoImpl implements PostRepo {
 	@Override
 	public void createPost(Posts post) {
 	System.out.println("starting to create post...");
-		
+		System.out.println(post);
 		sesFact.getCurrentSession().save(post);
 		
 	}

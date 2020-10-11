@@ -40,19 +40,6 @@ export class PersonalpageComponent implements OnInit {
   
   friendNumber;
 
-  // Should go to object made in adding() 
-  friendId = 34;
-  // Should go to object made in adding(); this.currentUser.userID
-  userID = 28;
-  adding(){
-    const pair = {
-      "key": 0,
-      "userId": this.userID,
-      "friendId": this.friendId
-    }
-    this.friendService.addFriend(pair).subscribe();
-  }
-
   loadValues() {
         this.friendService.getFriends(this.currentUser["id"]).subscribe(
           data => {
@@ -67,7 +54,4 @@ export class PersonalpageComponent implements OnInit {
       // });
   }
 
-  editProfile(){
-      this.notFriend = !this.notFriend; 
-  }
 }

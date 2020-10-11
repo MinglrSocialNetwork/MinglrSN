@@ -19,7 +19,6 @@
                 <div class="card-body">
                     <div class='row'>
                         <h5 class="card-title col">{{post["username"]}}</h5>
-                        <button *ngIf="checkFriend(post['userID'])" class="btn btn-secondary btn-sm" type="button" (click)="adding(post['userID'])">Add Friend</button>
                         <span *ngIf="currentUser['id'] == post['userID']">
                             <i class="fas fa-pencil-alt" id="editButton" title='edit post' (click)="editMode(post)"></i>
                             <button id='deleteButton' (click)='deletePost(post)' title='Delete this post?'>

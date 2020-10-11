@@ -35,5 +35,20 @@ export class PostService {
   updatePost(post: any) {
     let id: number = post["id"];
     return this.http.put(this.url + 'posts/updatePost/' + id, post);
+ 
+  }
+  
+  upvotePost(post: any,userId:any) {
+    console.log(userId);
+    return this.http.put(this.url + 'posts/upvotePost/' + userId, post);
+  }
+
+  downvotePost(post: any, userId:any) {
+    console.log(userId);
+    return this.http.put(this.url + 'posts/downvotePost/' + userId, post);
+  }
+
+  getVotes(userId): Observable<any[]> {
+    return this.http.get<any[]>(this.url + 'selectAllVotes/'+ userId);
   }
 }

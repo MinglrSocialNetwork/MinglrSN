@@ -180,5 +180,55 @@ export class GlobalfeedComponent implements OnInit {
   // Access individual form field value:
   // myForm.value.<field>;
 
+  
+  proxyObject:Object = {};
+  voteList: Object[] = [];
+
+  openComment(postid){
+    this.proxyObject['id']=postid;
+    this.proxyObject['expanded'] = !this.proxyObject['expanded'];
+  }
+
+  canVote(post:any){
+    const updatingPost = this.voteList.find(x => x["postId"] == post["id"]);
+    console.log(updatingPost);
+    if(updatingPost == undefined){
+      console.log("you can vote");
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  upvotePost(post:any){   
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    const indexPost = this.postList.indexOf(updatingPost);
+    updatingPost['upvote'] = updatingPost['upvote'] + 1;
+    this.postList[indexPost] = updatingPost;
+
+    this.postService.upvotePost(updatingPost, this.currentUser['userId']).subscribe();
+    setTimeout(() => this.loadVotes(), 200);
+  }
+
+  downvotePost(post:any){
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    const indexPost = this.postList.indexOf(updatingPost);
+    updatingPost['downvote'] = updatingPost['downvote'] + 1;
+    this.postList[indexPost] = updatingPost;
+
+    this.postService.downvotePost(updatingPost,this.currentUser['userId']).subscribe();
+    setTimeout(() => this.loadVotes(), 200);
+  }
+
+  loadVotes(): void {
+    this.postService.getVotes(this.currentUser['userId']).subscribe((data) => 
+    {
+      if (data.length > 0) {
+        for (let item of data) {
+          this.voteList.unshift(item);
+        }
+      }
+    })
+  }
 }
 

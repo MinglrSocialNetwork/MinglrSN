@@ -105,7 +105,20 @@ public class PostRepoImpl implements PostRepo {
 		return users.get(0);
 	}
 
+	@Override
+	public void increaseUpvotes(int postid, int upVote) {		
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setUpvote(upVote);
+		sesFact.getCurrentSession().save(post);
+	}
 
+	@Override
+	public void increaseDownVotes(int postid, int downVote) {
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setDownvote(downVote);
+		sesFact.getCurrentSession().save(post);
+		
+	}
 
 }
 	

@@ -1,1 +1,25 @@
-<p>comment works!</p>
+<div class="container centered" style="background-color:whitesmoke;">
+    <form  #textCommentForm="ngForm" >
+        <div class="form-group "> 
+            <textarea  #searchTerm style="width:100%" class="form-control" name='commentText' id="commentText" ngModel required></textarea>
+        </div>
+            <button class="btn btn-dark float-right"  [disabled]='!textCommentForm.form.valid' (click)="performSearch(searchTerm.value)">search-gif</button>   
+            <button class="btn btn-dark float-right"  [disabled]='!textCommentForm.form.valid' (click)="onSubmit()">submit</button>                  
+    </form>
+
+    <div>
+        <div *ngFor="let g of top_10_gifs ">
+            <button (click)="addImage(g['media'][0]['gif']['url'])">
+                <img src="{{g['media'][0]['nanogif']['url']}}">
+            </button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div *ngFor = "let comment of comments" >
+        <div *ngIf = "comment['postId'] == parentPostId">
+            <p>{{comment["commentText"]}}</p>
+            <img src="{{comment['gifUrl']}}">
+        </div>
+    </div>
+</div>

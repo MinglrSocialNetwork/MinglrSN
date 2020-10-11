@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,11 +32,19 @@ public class UserController {
 		return "Oh yea!!";
 	}
 	
+<<<<<<< HEAD
 	@GetMapping(value = "/8661", produces = "application/json")
     public @ResponseBody List<User> getAllUsers(){
         List<User> allUsers = userRepo.selectAllUsers();
         return allUsers;
     }
+=======
+	@GetMapping(value = "/8661")
+	public @ResponseBody List<User> getAllUsers(){
+		List<User> allUsers = userRepo.selectAllUsers();
+		return allUsers;
+	}
+>>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
 	
 	
 }

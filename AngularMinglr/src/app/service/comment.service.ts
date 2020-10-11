@@ -8,8 +8,6 @@ export class CommentService {
 
   constructor(private http: HttpClient) { }
   //apiLink is used for giphy search
-  apiLink = "http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=";
-
   gif_search_url = "https://api.tenor.com/v1/search?q=";
   apikey = "LIVDSRZULELA";
   lmt = 8;
@@ -22,7 +20,7 @@ export class CommentService {
   }
 
   createComment(data: any){
-    console.log(data);
+    //console.log(data);
     return this.http.post(this.url + 'createComment', data);
   }
 
@@ -32,7 +30,7 @@ export class CommentService {
   }
 
   gifSearch(searchTerm:string): Observable<any[]> {
-    console.log("getting giph " + searchTerm);
+    //console.log("getting giph " + searchTerm);
     return this.http.get<any[]>(this.gif_search_url+searchTerm +"&key=" + this.apikey + "&limit=" + this.lmt);
     //return this.http.get<any[]>(this.apiLink+searchTerm);
   }

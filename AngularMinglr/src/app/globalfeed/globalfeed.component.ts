@@ -28,8 +28,8 @@ export class GlobalfeedComponent implements OnInit {
   message: string;
 
   currentUser: Object = {
-    'username': 'javyduty',
-    'id': 12
+    'username': 'PrisonMike',
+    'id': 28
   }
 
   @ViewChild('textPostForm') textPostForm: any;
@@ -45,10 +45,9 @@ export class GlobalfeedComponent implements OnInit {
   //Called when user submits a new post
   onSubmit(){
     if(this.textPostForm.valid){
-      // let postDate: number = Date.now();
-      // this.textPostForm.value.date = postDate;
-      // this.textPostForm.value.username = this.currentUser['username'];
-      this.textPostForm.value.userID = this.currentUser['userId'];
+      let postDate: number = Date.now();
+      this.textPostForm.value.date = postDate;
+      this.textPostForm.value.userID = this.currentUser['id'];
       this.textPostForm.value.upvote = 0;
       this.textPostForm.value.downvote = 0;
       this.textPostForm.value.image = null; 
@@ -56,15 +55,15 @@ export class GlobalfeedComponent implements OnInit {
 
       //get image info if submitted
       if (this.selectedFile != null){
-        console.log(this.selectedFile);
+        //console.log(this.selectedFile);
 
         this.textPostForm.value.image = this.selectedFile;
 
-        console.log(this.textPostForm.value.image);
+        //console.log(this.textPostForm.value.image);
         this.textPostForm.value.imageExtension = this.selectedFile.name;
-        console.log(this.textPostForm.value.imageExtension);
+        //console.log(this.textPostForm.value.imageExtension);
 
-        console.log(this.textPostForm.value);
+        //console.log(this.textPostForm.value);
 
         // const uploadImageData = new FormData();
         // uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
@@ -151,9 +150,9 @@ export class GlobalfeedComponent implements OnInit {
 
   canVote(post:any){
     const updatingPost = this.voteList.find(x => x["postId"] == post["id"]);
-    console.log(updatingPost);
+   // console.log(updatingPost);
     if(updatingPost == undefined){
-      console.log("you can vote");
+     // console.log("you can vote");
       return true;
     }else{
       return false;
@@ -166,7 +165,7 @@ export class GlobalfeedComponent implements OnInit {
     updatingPost['upvote'] = updatingPost['upvote'] + 1;
     this.postList[indexPost] = updatingPost;
 
-    this.postService.upvotePost(updatingPost, this.currentUser['userId']).subscribe();
+    this.postService.upvotePost(updatingPost, this.currentUser['id']).subscribe();
     setTimeout(() => this.loadVotes(), 200);
   }
 
@@ -176,12 +175,12 @@ export class GlobalfeedComponent implements OnInit {
     updatingPost['downvote'] = updatingPost['downvote'] + 1;
     this.postList[indexPost] = updatingPost;
 
-    this.postService.downvotePost(updatingPost,this.currentUser['userId']).subscribe();
+    this.postService.downvotePost(updatingPost,this.currentUser['id']).subscribe();
     setTimeout(() => this.loadVotes(), 200);
   }
 
   loadVotes(): void {
-    this.postService.getVotes(this.currentUser['userId']).subscribe((data) => 
+    this.postService.getVotes(this.currentUser['id']).subscribe((data) => 
     {
       if (data.length > 0) {
         for (let item of data) {

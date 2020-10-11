@@ -49,7 +49,7 @@ export class PersonalpageComponent implements OnInit {
   // Should go to object made in adding() 
   friendId = 34;
   // Should go to object made in adding(); this.currentUser.userID
-  userID = 3;
+  userID = 28;
   adding(){
     const pair = {
       "key": 0,

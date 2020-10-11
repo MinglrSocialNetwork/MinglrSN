@@ -15,11 +15,16 @@
         </div>
     </div>
     <br>
-    <br>
     <div *ngFor = "let comment of comments" >
         <div *ngIf = "comment['postId'] == parentPostId">
-            <p>{{comment["commentText"]}}</p>
-            <img src="{{comment['gifUrl']}}">
+            <br>
+            <div *ngIf="comment['commentText'] != null" >
+                <p>{{comment["commentText"]}}</p>
+            </div>
+            <br>
+            <div *ngIf="comment['gifUrl'] != null" >
+                <img width="50%" height="50%" src="{{comment['gifUrl']}}">
+            </div>
         </div>
     </div>
 </div>

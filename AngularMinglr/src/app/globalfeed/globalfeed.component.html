@@ -26,7 +26,7 @@
                             </button>
                         </span>
                     </div>
-                    <h6 class="card-subtitle mb-2 text-muted">{{today | date:'shortDate'}} at {{today | date:'shortTime'}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ post['date'] | date:'shortDate'}} at {{post['date'] | date:'shortTime'}}</h6>
                     <p *ngIf="editModePostId != post['id']" class="card-text">{{post["postText"]}}</p>
                     <div *ngIf="editModePostId == post['id']">
                         <form #editPostForm="ngForm" (ngSubmit)="editPost(post)">
@@ -41,8 +41,8 @@
                         <img [src]="retrievedImage">
                     </div>
                     <div class='row'>
-                        <div class='triangle-up' title='upvote' (click)='upvotePost(post)'> </div>
-                        <div class='triangle-down' title='downvote' (click)='downvotePost(post)'></div>   
+                        <div class='triangle-up' title='upvote' (click)='canVote(post) ? upvotePost(post): false'> </div>
+                        <div class='triangle-down' title='downvote' (click)='canVote(post) ? downvotePost(post): false'></div>   
                     </div>
                     <div class="row">
                         <p id='voteNum1'>{{post["upvote"]}}</p>

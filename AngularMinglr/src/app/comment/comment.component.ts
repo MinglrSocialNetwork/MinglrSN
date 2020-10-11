@@ -29,16 +29,16 @@ export class CommentComponent implements OnInit {
   loadComments(): void {
     this.commentService.getComments().subscribe((data) => 
     {
-       this.comments = data;
+      this.comments = [];
     //   console.log(data);
-      //  if (data.length > 0) {
-      //    for (let item of data) {
-      //      this.comments.unshift(item);
-      //    }
-      //  }
-       console.log(data);
+        if (data.length > 0) {
+          for (let item of data) {
+            this.comments.unshift(item);
+          }
+        }
+       //console.log(data);
     })
-    console.log("Finished loading comments");
+   // console.log("Finished loading comments");
   }
   
   //Everything HostListner,onInput, and adjust is used to perform textarea autosize

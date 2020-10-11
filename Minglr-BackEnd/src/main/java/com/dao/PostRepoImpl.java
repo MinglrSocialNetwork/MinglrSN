@@ -20,10 +20,10 @@ public class PostRepoImpl implements PostRepo {
 
 	@Override
 	public List<Posts> selectAllPosts() {
-	System.out.println("getting all posts..");
+	
 	
 		List<Posts> posts = sesFact.getCurrentSession().createQuery("from Posts p order by p.id ASC", Posts.class).list();
-		
+		System.out.println(posts);
 		return posts;
 		
 	}

@@ -19,7 +19,7 @@ import com.models.Comment;
 
 @RestController
 @RequestMapping(value = "/comment")
-@CrossOrigin(origins = "*") //will change 
+@CrossOrigin(origins = "http://localhost:4200") //will change 
 public class CommentController {
 
 	@Autowired

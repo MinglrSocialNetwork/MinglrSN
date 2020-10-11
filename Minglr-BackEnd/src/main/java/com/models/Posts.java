@@ -34,18 +34,17 @@ public class Posts{
 	private String postText;
 	
 	@Column(name="image")
-	private byte[] image;
+	private String image;	
 	
-	@Column(name="image_extension")
-	private String imageExtension;
-	
+	@Column(name="post_date")
+	private Long date;
 
 	public Posts() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Posts(String userID, int id, int upvote, int downvote, String postText, byte[] image, String imageExtension) {
+	public Posts(String userID, int id, int upvote, int downvote, String postText, String image, Long date) {
 		super();
 		this.userID = userID;
 		this.id = id;
@@ -53,16 +52,7 @@ public class Posts{
 		this.downvote = downvote;
 		this.postText = postText;
 		this.image = image;
-		this.imageExtension = imageExtension;
-	}
-	
-	public Posts(String userID, int id, int upvote, int downvote, String postText) {
-		super();
-		this.userID = userID;
-		this.id = id;
-		this.upvote = upvote;
-		this.downvote = downvote;
-		this.postText = postText;
+		this.date = date;
 	}
 
 	public String getUserID() {
@@ -105,26 +95,25 @@ public class Posts{
 		this.postText = postText;
 	}
 
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
-	public String getImageExtension() {
-		return imageExtension;
+	public Long getDate() {
+		return date;
 	}
 
-	public void setImageExtension(String imageExtension) {
-		this.imageExtension = imageExtension;
+	public void setDate(Long date) {
+		this.date = date;
 	}
 
 	@Override
 	public String toString() {
 		return "Posts [userID=" + userID + ", id=" + id + ", upvote=" + upvote + ", downvote=" + downvote
-				+ ", postText=" + postText + ", image=" + image + ", imageExtension=" + imageExtension + "]";
-	}	
-
+				+ ", postText=" + postText + ", image=" + image + ", date=" + date + "]";
+	}
 }

@@ -27,10 +27,7 @@ export class GlobalfeedComponent implements OnInit {
   retrieveResonse: any;
   message: string;
 
-  currentUser: Object = {
-    'username': 'PrisonMike',
-    'id': 28
-  }
+  currentUser = JSON.parse(localStorage.getItem('token'));
 
   @ViewChild('textPostForm') textPostForm: any;
 

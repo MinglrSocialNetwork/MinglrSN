@@ -15,34 +15,28 @@ export class PersonalpageComponent implements OnInit {
               private userService: UserService,
               private friendService: FriendService) { }
            
-  currentUser: any = {};
+
   postNumber;
   notFriend = true;
   friendList = [];
   
-  setUser(user: any){
-    this.currentUser = user;
-    this.name = this.currentUser.firstName + " " + this.currentUser.lastName;
-
-
-  }
+  currentUser = JSON.parse(localStorage.getItem('token'));
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(data => {
-      this.setUser(data);
-      console.log(this.currentUser);
-    })
-  this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
+  this.postService.getPostsbyId(this.currentUser['id']).subscribe(data => {
     this.postNumber = data.length;
     });
+  this.loadValues();
+  console.log(this.currentUser['userName']);
+  console.log(this.currentUser['id']);
   console.log(this.currentUser);
 }
 
 
 
 //Needs to call details from user bean.
-  name = '';
-  username = '';
+  name = this.currentUser['firstName']+ " " + this.currentUser['lastName'];;
+  username = this.currentUser['userName'];
   
   friendNumber;
 
@@ -62,6 +56,7 @@ export class PersonalpageComponent implements OnInit {
   loadValues() {
         this.friendService.getFriends(this.currentUser["id"]).subscribe(
           data => {
+            console.log(data);
             this.friendNumber = data.length;
             this.friendList = data;
           }

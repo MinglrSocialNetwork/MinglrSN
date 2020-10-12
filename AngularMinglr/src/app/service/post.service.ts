@@ -15,13 +15,9 @@ export class PostService {
     return this.http.get<any[]>(this.url + 'selectAllPosts');
   }
 
-<<<<<<< HEAD
+
   getUsername(postId: any): Observable<String> {
     return this.http.get<String>(this.url + 'getUsername/' + postId);
-=======
-  getPostsbyId(user): Observable<any[]> {
-    return this.http.get<any[]>(this.url + 'getPosts/'+ user);
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
   }
   
   getPostsbyId(user): Observable<any[]> {

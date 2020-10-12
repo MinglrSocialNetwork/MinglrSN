@@ -15,15 +15,8 @@ export class FriendService {
   }
 
   addFriend(pair): Observable<any> {
-<<<<<<< HEAD
     return this.friendClient.post("http://localhost:8080/Minglr/friend/addFriend",pair);
   }
 
 }
-=======
-    console.log(pair);
-    return this.friendClient.post("http://localhost:8080/Minglr/friend/addFriend",pair);
-  }
 
-}
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b

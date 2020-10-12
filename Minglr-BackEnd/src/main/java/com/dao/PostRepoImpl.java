@@ -20,10 +20,10 @@ public class PostRepoImpl implements PostRepo {
 
 	@Override
 	public List<Posts> selectAllPosts() {
-	System.out.println("getting all posts..");
+	
 	
 		List<Posts> posts = sesFact.getCurrentSession().createQuery("from Posts p order by p.id ASC", Posts.class).list();
-		
+		System.out.println(posts);
 		return posts;
 		
 	}
@@ -36,7 +36,7 @@ public class PostRepoImpl implements PostRepo {
 	@Override
 	public void createPost(Posts post) {
 	System.out.println("starting to create post...");
-		
+		System.out.println(post);
 		sesFact.getCurrentSession().save(post);
 		
 	}
@@ -105,7 +105,20 @@ public class PostRepoImpl implements PostRepo {
 		return users.get(0);
 	}
 
+	@Override
+	public void increaseUpvotes(int postid, int upVote) {		
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setUpvote(upVote);
+		sesFact.getCurrentSession().save(post);
+	}
 
+	@Override
+	public void increaseDownVotes(int postid, int downVote) {
+		Posts post = (Posts) sesFact.getCurrentSession().get(Posts.class, postid);
+		post.setDownvote(downVote);
+		sesFact.getCurrentSession().save(post);
+		
+	}
 
 }
 	

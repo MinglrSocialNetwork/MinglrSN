@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+.background {
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: .75s;
+}
+
+.nav {
+  padding: 0px;
+  width: 1200px;
+  margin: 0px auto auto auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li a {
+  padding: 30px;
+  float: left;
+  width: 400px;
+  text-align: center;
+  font-size: 30px;
+  color: #edf5e1;
+  text-decoration: none;
+}
+
+li a:hover .circle {
+  position: relative;
+  z-index: 1;
+  top: -60px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  animation: illuminate 2s ease-out infinite;
+  background: #fdc6be;
+}
+
+li i {
+  height: 50px;
+}
+
+li a:hover i {
+  transform: translateY(-10px);
+}
+
+li a .title {
+  font-size: 0px;
+}
+
+li a:hover .title {
+  transform: translateY(10px);
+  font-size: 25px;
+  transition: .5s;
+}
+
+li a.title:hover {
+  transform: translateY(-10px);
+}
+
+.nav li:first-child a {
+  background: #e9900b;
+}
+
+.nav li:nth-child(2) a {
+  background: #464343;
+}
+
+.nav li:nth-child(3) a {
+  background: #8b130f;
+}
+
+.nav li:first-child:hover ~ .background {
+  background: #f1c602;
+}
+
+.nav li:nth-child(2):hover ~ .background {
+  background: #8e9c9a;
+}
+
+.nav li:nth-child(3):hover ~ .background {
+  background: #ec0b0b;
+}

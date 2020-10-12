@@ -1,1 +1,33 @@
-<p>navigation works!</p>
+<ul class="nav">
+    <li>
+      <a routerLink="/globalfeed" routerLinkActive="active">
+        <i class="fas fa-globe-americas fa-2x"></i>
+        <div class = "title">Global</div>
+      </a>
+    </li>
+    
+    <li>
+      <a routerLink="/personalpage" routerLinkActive="active">
+        <i class="fas fa-2x fa-user-circle"></i>
+        <div class = "title">My Thoughts</div>
+      </a>
+    </li>
+  
+    <li>
+      <a routerLink="/logout" routerLinkActive="active">
+
+        <i class="fas fa-2x fa-sign-out-alt"></i>
+        <div class = "title">Logout</div>
+      </a>
+    </li>
+    
+    
+    <div class="background">
+
+     
+    </div>
+
+  </ul>
+  <br>
+  <br>
+  <router-outlet></router-outlet> 

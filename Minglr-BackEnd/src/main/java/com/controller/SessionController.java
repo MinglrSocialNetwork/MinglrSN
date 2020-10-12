@@ -14,9 +14,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.models.User;
 
 @Controller("SessionController")
-
-@RequestMapping(value = "/sessions")
-@CrossOrigin(origins = "http://d2833sfl28pbuq.cloudfront.net", allowCredentials = "true")
+@RequestMapping(value="/sessions")
+@CrossOrigin(origins="http://d2833sfl28pbuq.cloudfront.net", allowCredentials="true")
 public class SessionController {
 	
 	@PostMapping(value = "login")

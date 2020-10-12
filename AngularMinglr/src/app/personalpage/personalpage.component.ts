@@ -15,63 +15,35 @@ export class PersonalpageComponent implements OnInit {
               private userService: UserService,
               private friendService: FriendService) { }
            
-  currentUser: any = {};
+
   postNumber;
   notFriend = true;
   friendList = [];
   
-
-  setUser(user: any){
-    this.currentUser = user;
-    this.name = this.currentUser.firstName + " " + this.currentUser.lastName;
-  }
+  currentUser = JSON.parse(localStorage.getItem('token'));
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(data => {
-      this.setUser(data);
-      console.log(this.currentUser);
-    })
-
-  this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
+  this.postService.getPostsbyId(this.currentUser['id']).subscribe(data => {
     this.postNumber = data.length;
     });
-
-  this.postService.getPosts().subscribe(data => {
-    for(let item of data) {
-      if(item["userID"] == this.currentUser['userId']) {
-        this.postNumber++;
-        console.log(data);
-      }
-    }
-  });
-
+  this.loadValues();
+  console.log(this.currentUser['userName']);
+  console.log(this.currentUser['id']);
   console.log(this.currentUser);
 }
 
 
 
 //Needs to call details from user bean.
-  name = '';
-  username = '';
+  name = this.currentUser['firstName']+ " " + this.currentUser['lastName'];;
+  username = this.currentUser['userName'];
   
   friendNumber;
-
-  // Should go to object made in adding() 
-  friendId = 34;
-  // Should go to object made in adding(); this.currentUser.userID
-  userID = 3;
-  adding(){
-    const pair = {
-      "key": 0,
-      "userId": this.userID,
-      "friendId": this.friendId
-    }
-    this.friendService.addFriend(pair).subscribe();
-  }
 
   loadValues() {
         this.friendService.getFriends(this.currentUser["id"]).subscribe(
           data => {
+            console.log(data);
             this.friendNumber = data.length;
             this.friendList = data;
           }
@@ -82,7 +54,4 @@ export class PersonalpageComponent implements OnInit {
       // });
   }
 
-  editProfile(){
-      this.notFriend = !this.notFriend; 
-  }
 }

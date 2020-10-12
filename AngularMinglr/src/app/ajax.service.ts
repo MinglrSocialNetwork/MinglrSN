@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AjaxService {
 
   //base endpoint
-  baseUrl = "http://localhost:8080/Minglr/api/createUser";
+  baseUrl = "http://18.217.93.164:8085/Minglr-BackEnd/api/createUser";
 
   //sample json
   data: any = {

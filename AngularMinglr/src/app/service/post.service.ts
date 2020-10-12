@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  url: string = 'http://localhost:8085/Minglr/post/';
+  url: string = 'http://18.217.93.164:8085/Minglr-BackEnd/post/';
 
   constructor(private http: HttpClient) { }
 

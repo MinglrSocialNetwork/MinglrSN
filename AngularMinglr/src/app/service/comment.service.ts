@@ -12,7 +12,7 @@ export class CommentService {
   apikey = "LIVDSRZULELA";
   lmt = 8;
   
-  url: string = 'http://localhost:8080/Minglr/comment/';
+  url: string = 'http://18.217.93.164:8085/Minglr-BackEnd/comment/';
 
   getComments(): Observable<any[]> {
    // console.log("I am getting a comment");

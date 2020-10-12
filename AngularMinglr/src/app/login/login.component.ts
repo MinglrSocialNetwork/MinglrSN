@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       });
     this.userService.getAllUsers().subscribe(data =>{
         this.existingUsers = data;
-        console.log(this.existingUsers)
+        // console.log(this.existingUsers)
       });
     this.authService.logout();
     }
@@ -50,13 +50,13 @@ export class LoginComponent implements OnInit {
         if (this.loginFormParams.username.value == this.existingUsers[i].userName
               && this.loginFormParams.password.value == this.existingUsers[i].password  ){
                
-                console.log(this.existingUsers[i]);
+               // console.log(this.existingUsers[i]);
                 localStorage.setItem('isLoggedIn', "true");
                 localStorage.setItem('token',JSON.stringify(this.existingUsers[i]));
                 var currentUser = JSON.parse(localStorage.getItem('token'));
-                console.log(currentUser['userName']);
-                console.log(currentUser['id']);
-                console.log(currentUser)
+                // console.log(currentUser['userName']);
+                // console.log(currentUser['id']);
+                // console.log(currentUser)
                 //console.log(localStorage.getItem('token'));
                 // this.userService.loginUser(this.existingUsers[i]).subscribe(data =>{
                 //   this.currentUser = data;}

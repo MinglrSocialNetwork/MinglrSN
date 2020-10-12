@@ -21,14 +21,14 @@ export class PosthistoryComponent implements OnInit {
      for(let item of data) {
           this.post.push(item);
      }
-     console.log(data);
+    //  console.log(data);
     });
   }
   
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem("token"));
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
     this.loadPosts();
   }
 }

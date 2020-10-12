@@ -54,11 +54,11 @@ export class GlobalfeedComponent implements OnInit {
 
       //get image info if submitted
       if (this.selectedFile != null){
-        console.log(this.selectedFile);
+      //  console.log(this.selectedFile);
 
         this.textPostForm.value.image = this.selectedFile;
 
-        console.log(this.textPostForm.value);
+      //  console.log(this.textPostForm.value);
 
       }
 
@@ -117,7 +117,7 @@ export class GlobalfeedComponent implements OnInit {
       "userId": this.currentUser["id"],
       "friendId": friendId
     }
-    console.log(friendId);
+   // console.log(friendId);
     this.friendService.addFriend(pair).subscribe();
   }
 
@@ -127,7 +127,7 @@ export class GlobalfeedComponent implements OnInit {
          for(let item of data) {
            this.friendList.push(item);
          }
-         console.log(this.friendList);
+     //    console.log(this.friendList);
        });
   }
 
@@ -151,7 +151,7 @@ export class GlobalfeedComponent implements OnInit {
   //Called when a user attaches an image
   onFileChanged($event) {
     //Select File
-    console.log($event.target);
+   // console.log($event.target);
     this.readThis($event.target);
   }
  // Converts the file into Base64
@@ -159,7 +159,7 @@ export class GlobalfeedComponent implements OnInit {
     
     var file:File = inputValue.files[0];
     var myReader:FileReader = new FileReader();
-    console.log(file);
+ //   console.log(file);
     myReader.onloadend = (e) => {
       this.selectedFile = myReader.result;
       this.setPicture(this.selectedFile);

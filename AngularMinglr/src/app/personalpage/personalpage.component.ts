@@ -27,9 +27,9 @@ export class PersonalpageComponent implements OnInit {
     this.postNumber = data.length;
     });
   this.loadValues();
-  console.log(this.currentUser['userName']);
-  console.log(this.currentUser['id']);
-  console.log(this.currentUser);
+  // console.log(this.currentUser['userName']);
+  // console.log(this.currentUser['id']);
+  // console.log(this.currentUser);
 }
 
 
@@ -43,7 +43,7 @@ export class PersonalpageComponent implements OnInit {
   loadValues() {
         this.friendService.getFriends(this.currentUser["id"]).subscribe(
           data => {
-            console.log(data);
+            // console.log(data);
             this.friendNumber = data.length;
             this.friendList = data;
           }

@@ -9,6 +9,7 @@ export class FriendService {
 
   constructor(private friendClient: HttpClient) { }
 
+  
   getFriends(user): Observable<any>{
     return this.friendClient.get("http://18.217.93.164:8085/Minglr-BackEnd/friend/getFriends/"+user);
 

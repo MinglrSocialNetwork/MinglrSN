@@ -40,12 +40,12 @@ export class PostService {
   }
   
   upvotePost(post: any,userId:any) {
-    console.log(userId);
+    // console.log(userId);
     return this.http.put(this.url + 'posts/upvotePost/' + userId, post);
   }
 
   downvotePost(post: any, userId:any) {
-    console.log(userId);
+    // console.log(userId);
     return this.http.put(this.url + 'posts/downvotePost/' + userId, post);
   }
 

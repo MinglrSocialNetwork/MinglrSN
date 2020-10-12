@@ -28,7 +28,7 @@ import com.models.Vote;
 
 @Controller("PostController")
 @RequestMapping(value = "/post")
-@CrossOrigin(origins = "http://d2833sfl28pbuq.cloudfront.net") //will change 
+@CrossOrigin(origins = "http://minglrs3bucket.s3-website.us-east-2.amazonaws.com") //will change 
 public class PostController {
 	
 	@Autowired

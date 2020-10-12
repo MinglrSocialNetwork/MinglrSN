@@ -15,7 +15,7 @@ import com.models.User;
 
 @Controller("SessionController")
 @RequestMapping(value="/sessions")
-@CrossOrigin(origins="http://d2833sfl28pbuq.cloudfront.net", allowCredentials="true")
+@CrossOrigin(origins="http://minglrs3bucket.s3-website.us-east-2.amazonaws.com", allowCredentials="true")
 public class SessionController {
 	
 	@PostMapping(value = "login")

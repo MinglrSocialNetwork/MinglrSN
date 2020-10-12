@@ -16,7 +16,7 @@ import com.models.User;
 
 @Controller
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = "*") //will be changed for a specific endpoint
+@CrossOrigin(origins = "http://d2833sfl28pbuq.cloudfront.net") //will be changed for a specific endpoint
 public class UserController {
 	
 	@Autowired

@@ -32,19 +32,10 @@ public class UserController {
 		return "Oh yea!!";
 	}
 	
-<<<<<<< HEAD
+
 	@GetMapping(value = "/8661", produces = "application/json")
     public @ResponseBody List<User> getAllUsers(){
         List<User> allUsers = userRepo.selectAllUsers();
         return allUsers;
     }
-=======
-	@GetMapping(value = "/8661")
-	public @ResponseBody List<User> getAllUsers(){
-		List<User> allUsers = userRepo.selectAllUsers();
-		return allUsers;
-	}
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
-	
-	
 }

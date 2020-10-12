@@ -1,10 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
-Built-By: cabal
-Build-Jdk: 14.0.2
-=======
-Built-By: Javy
-Build-Jdk: 1.8.0_121
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
+Built-By: Taylor Steffan
+Build-Jdk: 1.8.0_261
 Created-By: Maven Integration for Eclipse
 

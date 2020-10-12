@@ -14,7 +14,7 @@ import com.models.Image;
 
 @Controller
 @RequestMapping(value = "/image")
-@CrossOrigin(origins = "http://localhost:4200") 
+@CrossOrigin(origins = "http://d2833sfl28pbuq.cloudfront.net") 
 public class ImageController {
 	
 	@Autowired

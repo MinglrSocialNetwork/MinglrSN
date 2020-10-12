@@ -17,7 +17,7 @@ import com.models.Friend;
 
 @Controller
 @RequestMapping(value="/friend")
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="http://d2833sfl28pbuq.cloudfront.net")
 public class FriendController {
 
 	@Autowired

@@ -18,6 +18,16 @@
 	<!-- Turning on mvc annotations (Spring MVC) -->
 	<mvc:annotation-driven/>
 	
+	<mvc:cors>
+        <mvc:mapping path="/*"
+            allowed-origins="http://localhost:4200/, http://minglrs3bucket.s3.us-east-2.amazonaws.com/,  http://d2833sfl28pbuq.cloudfront.net/"
+            allowed-methods="GET, PUT, POST, OPTIONS, DELETE, HEAD"
+            allowed-headers="Content-Type, content-type, x-requested-with, Access-Control-Allow-Origin, Access-Control-Allow-Headers, x-auth-token, x-app-id, Origin,Accept, X-Requested-With, Access-Control-Request-Method, Access-Control-Request-Headers"
+            exposed-headers="Content-Type, content-type, x-requested-with, Access-Control-Allow-Origin, Access-Control-Allow-Headers, x-auth-token, x-app-id, Origin,Accept, X-Requested-With, Access-Control-Request-Method, Access-Control-Request-Headers"
+            allow-credentials="true" />
+
+    </mvc:cors>
+    
 	<!-- Turning on tx annotations (Spring ORM) -->
 	<tx:annotation-driven/>
 	

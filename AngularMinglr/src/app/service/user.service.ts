@@ -12,7 +12,7 @@ export class UserService {
   
   getAllUsers(): Observable<any>{
     console.log("in get all users");
-    return this.userClient.get("http://localhost:8085/Minglr/api/8661");
+    return this.userClient.get("http://18.217.93.164:8085/Minglr/api/8661");
   }
   
   addUser(userFormData): Observable<any>{

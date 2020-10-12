@@ -10,12 +10,12 @@ export class FriendService {
   constructor(private friendClient: HttpClient) { }
 
   getFriends(user): Observable<any>{
-    return this.friendClient.get("http://localhost:8085/Minglr/friend/getFriends/"+user);
+    return this.friendClient.get("http://18.217.93.164:8085/Minglr/friend/getFriends/"+user);
 
   }
 
   addFriend(pair): Observable<any> {
-    return this.friendClient.post("http://localhost:8085/Minglr/friend/addFriend",pair);
+    return this.friendClient.post("http://18.217.93.164:8085/Minglr/friend/addFriend",pair);
   }
 
 }

@@ -44,12 +44,14 @@
                         <img class="image" [src]="retrievedImage">
                     </div>
                     <div class='row'>
+                    <div class="d-inline-block">
                         <div class='triangle-up' title='upvote' (click)='canVote(post) ? upvotePost(post): false'> </div>
-                        <div class='triangle-down' title='downvote' (click)='canVote(post) ? downvotePost(post): false'></div>   
-                    </div>
-                    <div class="row">
                         <span id='voteNum1'>{{post["upvote"]}}</span>
+                    </div>
+                    <div class="d-inline-block">
+                        <div class='triangle-down' title='downvote' (click)='canVote(post) ? downvotePost(post): false'></div>
                         <span id='voteNum2'>{{post["downvote"]}}</span>
+                    </div>
                     </div>
                     <div class="col-12 d-flex justify-content-end">
                         <button class="btn btn-dark float-right" [id]="post['id']"  (click)='openComment(post["id"])'>

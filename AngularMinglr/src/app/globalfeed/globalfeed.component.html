@@ -9,8 +9,7 @@
             </div> 
             <div class="form-group">
                 <input type="file" style="display:none" name="image" id="image" #picture (change)="onFileChanged($event)" ngModel>
-                <button id="picButton" class="btn btn-dark" (click)="picture.click()">
-                    image <i class="fas fa-paperclip"></i></button>
+                <button id="picButton" class="btn btn-dark" (click)="picture.click()">image <i class="fas fa-paperclip"></i></button>
                 <button [disabled]='!textPostForm.form.valid' class="btn btn-dark" type='submit' id="submit">Post it!</button>
             </div> 
         </form>
@@ -21,7 +20,7 @@
                 <div class="card-body">
                     <div class='row'>
                         <h5 class="card-title col">{{post["username"]}}</h5>
-                        <button *ngIf="checkFriend(post['userID'])" class="btn btn-secondary btn-sm" type="button" (click)="adding(post['userID'])">Add Friend</button>
+                        <button *ngIf="checkFriend(post['userID'])" class="btn btn-dark btn-sm" type="button" (click)="adding(post['userID'])">Add Friend</button>
                         <span *ngIf="currentUser['id'] == post['userID']">
                             <i class="fas fa-pencil-alt" id="editButton" title='edit post' (click)="editMode(post)"></i>
                             <button id='deleteButton' (click)='deletePost(post)' title='Delete this post?'>
@@ -30,7 +29,7 @@
                         </span>
                     </div>
                     <h6 class="card-subtitle mb-2 text-muted">{{ post['date'] | date:'shortDate'}} at {{post['date'] | date:'shortTime'}}</h6>
-                    <img *ngIf="post.image != null" src = "{{post.image}}" style="max-width: 60px;"/>
+                    <img *ngIf="post.image != null" class="image" src = "{{post.image}}"/>
                     <p *ngIf="editModePostId != post['id']" class="card-text">{{post["postText"]}}</p>
                     <div *ngIf="editModePostId == post['id']">
                         <form #editPostForm="ngForm" (ngSubmit)="editPost(post)">

@@ -117,8 +117,14 @@ export class GlobalfeedComponent implements OnInit {
       "userId": this.currentUser["id"],
       "friendId": friendId
     }
-   // console.log(friendId);
+    const pair2 = {
+      "key": 0,
+      "userId": friendId,
+      "friendId": this.currentUser["id"]
+    }
     this.friendService.addFriend(pair).subscribe();
+    this.friendService.addFriend(pair2).subscribe();
+    alert("Friend added successfully!");
   }
 
   setFriendList(userID) {

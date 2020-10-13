@@ -17,18 +17,18 @@ export class PosthistoryComponent implements OnInit {
               private userService: UserService) { }
 
   loadPosts() {
-        this.postService.getPostsbyId(this.currentUser["id"]).subscribe(data => {
+        this.postService.getPostsbyId(this.currentUser.id).subscribe(data => {
      for(let item of data) {
           this.post.push(item);
      }
-     console.log(data);
+    //  console.log(data);
     });
   }
   
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(data=> {
-      this.currentUser = data;
-    })
+    this.currentUser = JSON.parse(localStorage.getItem("token"));
+    // console.log(this.currentUser);
+    this.loadPosts();
   }
 }

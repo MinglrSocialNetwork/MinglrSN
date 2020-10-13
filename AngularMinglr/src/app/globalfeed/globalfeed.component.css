@@ -4,7 +4,7 @@
     height: 100%;
     background-size: cover;
     padding: 5%;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .center {
@@ -112,7 +112,11 @@ float: left;
     margin-top: -10px;
 }
 
+#picButton{
+    margin-left: 78%;
+    margin-top: -10px;
+}
 
-
-
-
+.card-body{
+    box-shadow: 20 2 black;
+}

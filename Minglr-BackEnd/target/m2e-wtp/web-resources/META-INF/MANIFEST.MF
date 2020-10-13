@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: Javy
 Build-Jdk: 1.8.0_121
+=======
+Built-By: emwan
+Build-Jdk: 1.8.0_261
+>>>>>>> ff8342de9bdbcc85ecea55e6301beaca9eaa43fc
 Created-By: Maven Integration for Eclipse
 

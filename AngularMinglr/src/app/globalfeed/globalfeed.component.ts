@@ -5,6 +5,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { PostService } from '../service/post.service';
 import { FriendService } from '../service/friend.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-globalfeed',
@@ -22,58 +23,42 @@ export class GlobalfeedComponent implements OnInit {
   editModePostId: number = -1;
   editedPostText: string;
 
-  selectedFile: File = null;
+  selectedFile: any;
   retrievedImage: any;
   base64Data: any;
   retrieveResonse: any;
   message: string;
   friendList = [];
-  currentUser: Object = {
-    'username': 'javyduty',
-    'id': 12
-  }
+  imagePath: any;
 
-  postId: number ;
+  currentUser = JSON.parse(localStorage.getItem('token'));
 
   @ViewChild('textPostForm') textPostForm: any;
 
-
-  constructor(private postService: PostService,
-              private friendService: FriendService) { }
-
+  constructor(private postService: PostService, private friendService:FriendService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.loadPosts();
-    this.setFriendList(this.currentUser["id"])
-    console.log(this.currentUser["id"])
+    this.setFriendList(this.currentUser['id']);
   }
   
   //Called when user submits a new post
   onSubmit(){
     if(this.textPostForm.valid){
-      // let postDate: number = Date.now();
-      // this.textPostForm.value.date = postDate;
-      // this.textPostForm.value.username = this.currentUser['username'];
-      this.textPostForm.value.userID = this.currentUser['userId'];
+      let postDate: number = Date.now();
+      this.textPostForm.value.date = postDate;
+      this.textPostForm.value.userID = this.currentUser['id'];
       this.textPostForm.value.upvote = 0;
       this.textPostForm.value.downvote = 0;
-      this.textPostForm.value.image = null; 
-      this.textPostForm.value.imageExtension = null;
+      this.textPostForm.value.image = this.selectedFile; 
 
       //get image info if submitted
       if (this.selectedFile != null){
-        console.log(this.selectedFile);
+      //  console.log(this.selectedFile);
 
         this.textPostForm.value.image = this.selectedFile;
 
-        console.log(this.textPostForm.value.image);
-        this.textPostForm.value.imageExtension = this.selectedFile.name;
-        console.log(this.textPostForm.value.imageExtension);
-
-        console.log(this.textPostForm.value);
-
-        // const uploadImageData = new FormData();
-        // uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+      //  console.log(this.textPostForm.value);
 
       }
 
@@ -106,6 +91,7 @@ export class GlobalfeedComponent implements OnInit {
           this.postService.getUsername(postId).subscribe((user) => 
             item["username"] = user["userName"]
           )
+          
           tempList.unshift(item);
         }
         this.postList = tempList;
@@ -125,18 +111,23 @@ export class GlobalfeedComponent implements OnInit {
     this.editModePostId = -1;
   }
 
-  cancelEdit() {
-    this.editModePostId = -1;
+  adding(friendId){
+    const pair = {
+      "key": 0,
+      "userId": this.currentUser["id"],
+      "friendId": friendId
+    }
+   // console.log(friendId);
+    this.friendService.addFriend(pair).subscribe();
   }
 
- 
   setFriendList(userID) {
     this.friendService.getFriends(userID).subscribe(
        data => {
          for(let item of data) {
            this.friendList.push(item);
          }
-         console.log(this.friendList);
+     //    console.log(this.friendList);
        });
   }
 
@@ -147,28 +138,39 @@ export class GlobalfeedComponent implements OnInit {
     }
     // Checks list of friends of current user
    for(let item of this.friendList) { 
-      if(item["friendId"] == userID) {
+      if(item[1] == userID) {
           return false;
         }
       } return true;
   }
 
-  adding(friendId){
-    const pair = {
-      "key": 0,
-      "userId": this.currentUser["id"],
-      "friendId": friendId
-    }
-    console.log(friendId);
-    this.friendService.addFriend(pair).subscribe();
+  cancelEdit() {
+    this.editModePostId = -1;
   }
 
   //Called when a user attaches an image
-  public onFileChanged(event) {
+  onFileChanged($event) {
     //Select File
-    this.selectedFile = event.target.files[0];
+   // console.log($event.target);
+    this.readThis($event.target);
   }
- 
+ // Converts the file into Base64
+  readThis(inputValue: any) {
+    
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+ //   console.log(file);
+    myReader.onloadend = (e) => {
+      this.selectedFile = myReader.result;
+      this.setPicture(this.selectedFile);
+    }
+    myReader.readAsDataURL(file);
+  }
+
+  setPicture(picture) {
+    this.selectedFile = picture;
+  }
+
   // Need to import FormsModule in app.module.ts to take advantage of NGFORM
   // BUILT-IN NGFORM METHODS
   // myform.value: It will provide you with the aggregated form value of all the fields used in your <form> tag,
@@ -180,5 +182,55 @@ export class GlobalfeedComponent implements OnInit {
   // Access individual form field value:
   // myForm.value.<field>;
 
+  
+  proxyObject:Object = {};
+  voteList: Object[] = [];
+
+  openComment(postid){
+    this.proxyObject['id']=postid;
+    this.proxyObject['expanded'] = !this.proxyObject['expanded'];
+  }
+
+  canVote(post:any){
+    const updatingPost = this.voteList.find(x => x["postId"] == post["id"]);
+   // console.log(updatingPost);
+    if(updatingPost == undefined){
+     // console.log("you can vote");
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  upvotePost(post:any){   
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    const indexPost = this.postList.indexOf(updatingPost);
+    updatingPost['upvote'] = updatingPost['upvote'] + 1;
+    this.postList[indexPost] = updatingPost;
+
+    this.postService.upvotePost(updatingPost, this.currentUser['id']).subscribe();
+    setTimeout(() => this.loadVotes(), 200);
+  }
+
+  downvotePost(post:any){
+    const updatingPost = this.postList.find(x => x["id"] === post["id"]);
+    const indexPost = this.postList.indexOf(updatingPost);
+    updatingPost['downvote'] = updatingPost['downvote'] + 1;
+    this.postList[indexPost] = updatingPost;
+
+    this.postService.downvotePost(updatingPost,this.currentUser['id']).subscribe();
+    setTimeout(() => this.loadVotes(), 200);
+  }
+
+  loadVotes(): void {
+    this.postService.getVotes(this.currentUser['id']).subscribe((data) => 
+    {
+      if (data.length > 0) {
+        for (let item of data) {
+          this.voteList.unshift(item);
+        }
+      }
+    })
+  }
 }
 

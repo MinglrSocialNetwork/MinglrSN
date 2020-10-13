@@ -7,7 +7,7 @@ Gitflow Manager: John Amores<br />
 
 Developers:<br />
 Morgan Lanueva<br />
-Abdalla Hablas<br />
+Jenkins Slayer<br />
 Aldo Caballero<br />
 Taylor Steffan<br />
 John Amores<br />

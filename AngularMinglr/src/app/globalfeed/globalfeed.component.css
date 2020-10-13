@@ -14,6 +14,7 @@
 .contentBox {
     opacity: .7;
     border-radius: .5rem!important;
+    box-shadow: 0 0 20px 3px #000000c7;
 }
 
 textarea.form-control {
@@ -119,4 +120,15 @@ float: left;
 
 .card-body{
     box-shadow: 20 2 black;
+}
+
+.image{
+    max-width: 300px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#postText{
+    box-shadow: 0 0 0 4px #fb9d9d;
 }

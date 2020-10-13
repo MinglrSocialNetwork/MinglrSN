@@ -6,3 +6,17 @@
     padding: 5%;
     overflow-y: scroll;
 }
+
+.post-history{
+    text-align: center;
+    color: white;
+    background-color: rgb(191 191 191 / 46%);
+    opacity: .9;
+}
+
+.table{
+    text-align: center;
+    color: white;
+    background-color: rgb(191 191 191 / 46%);
+    opacity: .9;
+}

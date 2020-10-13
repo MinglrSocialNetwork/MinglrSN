@@ -42,7 +42,7 @@
                         </form>
                     </div>
                     <div *ngIf='retrievedImage'>
-                        <img [src]="retrievedImage">
+                        <img class="image" [src]="retrievedImage">
                     </div>
                     <div class='row'>
                         <div class='triangle-up' title='upvote' (click)='canVote(post) ? upvotePost(post): false'> </div>

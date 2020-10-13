@@ -8,3 +8,7 @@
   display: grid;
   grid-template-columns: 200px 200px 200px;
 }
+
+.giphy-button{
+  margin-left: 10px;
+}

@@ -55,6 +55,7 @@ float: left;
     font-size: 12px;
     padding: 0;
     margin-left: 10px;
+    position: absolute;
 }
 
 #voteNum2 {
@@ -62,6 +63,7 @@ float: left;
     font-size: 12px;
     padding: 0;
     margin-left: 25px;
+    position: absolute;
 }
 
 #editButton {

@@ -55,15 +55,13 @@ float: left;
     font-size: 12px;
     padding: 0;
     margin-left: 10px;
-    position: absolute;
 }
 
 #voteNum2 {
     font-family: 'Nunito', sans-serif;
     font-size: 12px;
     padding: 0;
-    margin-left: 25px;
-    position: absolute;
+    margin-left: 10px;
 }
 
 #editButton {
@@ -133,4 +131,8 @@ float: left;
 
 #postText{
     box-shadow: 0 0 0 4px #fb9d9d;
+}
+
+#addFriend{
+    margin-right: 3%;
 }

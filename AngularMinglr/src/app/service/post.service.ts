@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
 
-  url: string = 'http://localhost:8080/Minglr/post/';
+  url: string = 'http://18.217.93.164:8085/Minglr-BackEnd/post/';
 
   constructor(private http: HttpClient) { }
 
@@ -15,13 +15,9 @@ export class PostService {
     return this.http.get<any[]>(this.url + 'selectAllPosts');
   }
 
-<<<<<<< HEAD
+
   getUsername(postId: any): Observable<String> {
     return this.http.get<String>(this.url + 'getUsername/' + postId);
-=======
-  getPostsbyId(user): Observable<any[]> {
-    return this.http.get<any[]>(this.url + 'getPosts/'+ user);
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
   }
   
   getPostsbyId(user): Observable<any[]> {
@@ -40,5 +36,20 @@ export class PostService {
   updatePost(post: any) {
     let id: number = post["id"];
     return this.http.put(this.url + 'posts/updatePost/' + id, post);
+ 
+  }
+  
+  upvotePost(post: any,userId:any) {
+    // console.log(userId);
+    return this.http.put(this.url + 'posts/upvotePost/' + userId, post);
+  }
+
+  downvotePost(post: any, userId:any) {
+    // console.log(userId);
+    return this.http.put(this.url + 'posts/downvotePost/' + userId, post);
+  }
+
+  getVotes(userId): Observable<any[]> {
+    return this.http.get<any[]>(this.url + 'selectAllVotes/'+ userId);
   }
 }

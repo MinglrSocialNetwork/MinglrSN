@@ -27,4 +27,8 @@ public interface PostRepo {
 	public void increaseDownVotes(int postid);
 	
 	public User getPostUsername(int postid);
+	
+	public void increaseUpvotes(int postid, int upvote);
+	
+	public void increaseDownVotes(int postid, int downVote);
 }

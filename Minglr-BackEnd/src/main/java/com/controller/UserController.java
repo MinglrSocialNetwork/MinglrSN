@@ -16,7 +16,7 @@ import com.models.User;
 
 @Controller
 @RequestMapping(value = "/api")
-@CrossOrigin(origins = "*") //will be changed for a specific endpoint
+@CrossOrigin(origins = "http://minglrs3bucket.s3-website.us-east-2.amazonaws.com") //will be changed for a specific endpoint
 public class UserController {
 	
 	@Autowired
@@ -32,19 +32,10 @@ public class UserController {
 		return "Oh yea!!";
 	}
 	
-<<<<<<< HEAD
+
 	@GetMapping(value = "/8661", produces = "application/json")
     public @ResponseBody List<User> getAllUsers(){
         List<User> allUsers = userRepo.selectAllUsers();
         return allUsers;
     }
-=======
-	@GetMapping(value = "/8661")
-	public @ResponseBody List<User> getAllUsers(){
-		List<User> allUsers = userRepo.selectAllUsers();
-		return allUsers;
-	}
->>>>>>> 6be9622574883c0ee335c67eb449b4e51b1a178b
-	
-	
 }

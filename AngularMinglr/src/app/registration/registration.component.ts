@@ -31,22 +31,22 @@ export class RegistrationComponent implements OnInit {
     if(value == this.password){
       this.passwordVal = true;
 
-      console.log("passwords match "+  this.passwordVal);
+      // console.log("passwords match "+  this.passwordVal);
     }else{
       this.passwordVal = false;
-      console.log("passwords dont match " + this.passwordVal);
+      // console.log("passwords dont match " + this.passwordVal);
 
     }
   }
 
   getUsername(name: string){
-    console.log(this.username);
+    // console.log(this.username);
     if(this.existingUsers.length > 0){
       this.username = name;
       for(var i=0; i < this.existingUsers.length; i++){
         if(this.username == this.existingUsers[i].userName){
           this.usernameVal = false;
-          console.log("user exists "+this.usernameVal);
+          // console.log("user exists "+this.usernameVal);
         }else{
           this.usernameVal = true;
         }
@@ -63,18 +63,18 @@ export class RegistrationComponent implements OnInit {
   reef(){
     this.userService.getAllUsers().subscribe(data =>{
       this.existingUsers = data;
-      console.log(this.existingUsers)
+      // console.log(this.existingUsers)
     });
   }
 
   onSubmit(){
-    console.log("in onSubmit");
-    console.log("usernameVal "+this.usernameVal +" passwordVal "+ this.passwordVal);
+    // console.log("in onSubmit");
+    // console.log("usernameVal "+this.usernameVal +" passwordVal "+ this.passwordVal);
     this.userService.addUser(this.registration.value).subscribe(data =>{
       this.existingUsers = data;
-      console.log(this.existingUsers)
+      // console.log(this.existingUsers)
     });
-    console.log("out of onSubmit");
+    // console.log("out of onSubmit");
     this.registration.reset();  
     this.router.navigateByUrl('/login');
     this.reef();
@@ -83,7 +83,7 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllUsers().subscribe(data =>{
       this.existingUsers = data;
-      console.log(this.existingUsers)
+      // console.log(this.existingUsers)
     });
   }
 

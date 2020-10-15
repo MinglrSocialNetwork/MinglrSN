@@ -21,16 +21,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dao.PostRepo;
+import com.dao.VoteRepo;
 import com.models.Posts;
 import com.models.User;
+import com.models.Vote;
 
 @Controller("PostController")
 @RequestMapping(value = "/post")
-@CrossOrigin(origins = "http://localhost:4200") //will change 
+@CrossOrigin(origins = "http://minglrs3bucket.s3-website.us-east-2.amazonaws.com") //will change 
 public class PostController {
 	
 	@Autowired
 	private PostRepo postRepo;
+	
+	@Autowired
+	private VoteRepo voteRepo;
 	
 	@GetMapping(value= "/getPosts/{userid}")
 	public @ResponseBody List<Posts> getPostbyId(@PathVariable String userid) {
@@ -103,6 +108,8 @@ public class PostController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
+	
+	
 	   // compress the image bytes before storing it in the database
 //	    public static byte[] compressBytes(byte[] data) {
 //	        Deflater deflater = new Deflater();
@@ -130,7 +137,36 @@ public class PostController {
 //		PC.deletePost(0, null);
 //		
 //	}
-		
+
+	@PutMapping(value = "/posts/upvotePost/{userId}")
+    public ResponseEntity<Void> upVotePost(@PathVariable int userId, @RequestBody Posts post ) {
+		/*
+		 * change db so that these 2 table are relational
+		 */
+		Vote vote = new Vote(0,userId,post.getId(),post.getUpvote(), post.getDownvote());		
+		voteRepo.createVotebyUser(vote);
+		postRepo.increaseUpvotes(post.getId(), post.getUpvote());
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
 	
+	@PutMapping(value = "/posts/downvotePost/{userId}")
+    public ResponseEntity<Void> downVotePost(@PathVariable int userId, @RequestBody Posts post) {
+		
+		System.out.println("Updating down vote post.... "+ userId);	
+		Vote vote = new Vote(0,userId,post.getId(),post.getDownvote(), post.getDownvote());
+		
+		voteRepo.createVotebyUser(vote);
+		postRepo.increaseDownVotes(post.getId(), post.getDownvote());
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/selectAllVotes/{userId}", produces="application/json")
+	public @ResponseBody List<Vote> selectAllVotes(@PathVariable int userId){
+		System.out.println(userId);
+		List<Vote> votes = voteRepo.selectAllVote(userId);
+		System.out.println(votes);
+//		System.out.println("Retrieving all posts.... " + posts);
+		return votes;	
+	}
 
 }

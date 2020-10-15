@@ -1,4 +1,5 @@
 <div class="bg-img">
+    <app-navigation></app-navigation>
     <div class="container">
     
         <!-- # creates a reference variable -->
@@ -7,8 +8,8 @@
                 <textarea class="form-control" name='postText' id="postText" rows="3" placeholder="Ready to mingle? Create a post here!" maxlength='6000' ngModel required></textarea> <!-- ngModel declares this field as an ngForm value -->
             </div> 
             <div class="form-group">
-                <p id="label">Attach an image</p>
-                <input type="file" name="image" id="image" (change)="onFileChanged($event)" ngModel>
+                <input type="file" style="display:none" name="image" id="image" #picture (change)="onFileChanged($event)" ngModel>
+                <button id="picButton" class="btn btn-dark" (click)="picture.click()">image <i class="fas fa-paperclip"></i></button>
                 <button [disabled]='!textPostForm.form.valid' class="btn btn-dark" type='submit' id="submit">Post it!</button>
             </div> 
         </form>
@@ -19,7 +20,7 @@
                 <div class="card-body">
                     <div class='row'>
                         <h5 class="card-title col">{{post["username"]}}</h5>
-                        <button *ngIf="checkFriend(post['userID'])" class="btn btn-secondary btn-sm" type="button" (click)="adding(post['userID'])">Add Friend</button>
+                        <button *ngIf="checkFriend(post['userID'])" id="addFriend" class="btn btn-dark btn-sm" type="button" (click)="adding(post['userID'])">Add Friend</button>
                         <span *ngIf="currentUser['id'] == post['userID']">
                             <i class="fas fa-pencil-alt" id="editButton" title='edit post' (click)="editMode(post)"></i>
                             <button id='deleteButton' (click)='deletePost(post)' title='Delete this post?'>
@@ -27,33 +28,43 @@
                             </button>
                         </span>
                     </div>
-                    <h6 class="card-subtitle mb-2 text-muted">{{today | date:'shortDate'}} at {{today | date:'shortTime'}}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ post['date'] | date:'shortDate'}} at {{post['date'] | date:'shortTime'}}</h6>
+                    <img *ngIf="post.image != null" class="image" src = "{{post.image}}"/>
                     <p *ngIf="editModePostId != post['id']" class="card-text">{{post["postText"]}}</p>
                     <div *ngIf="editModePostId == post['id']">
                         <form #editPostForm="ngForm" (ngSubmit)="editPost(post)">
                             <textarea class="form-control" name='editedPostText' id="editedPostText" rows="3" maxlength='6000' required [(ngModel)]="editedPostText"></textarea>
                             <div class="form-group row">
-                                <button class="btn btn-dark col-4" type="reset" (click)="cancelEdit()">Cancel</button>
-                                <button [disabled]='!editPostForm.form.valid' class="btn btn-dark col-4" type='submit' id="submitChanges">Submit changes</button>
+                            <button class="btn btn-danger" style="margin-top: 5px; margin-left: 69%; margin-right: 5px;" type="reset" (click)="cancelEdit()">Cancel</button>
+                                <button [disabled]='!editPostForm.form.valid' class="btn btn-success" style="margin-top: 5px;" type='submit' id="submitChanges">Submit changes</button>
                             </div>
                         </form>
                     </div>
                     <div *ngIf='retrievedImage'>
-                        <img [src]="retrievedImage">
+                        <img class="image" [src]="retrievedImage">
                     </div>
                     <div class='row'>
-                        <div class='triangle-up' title='upvote' (click)='upvotePost(post)'> </div>
-                        <div class='triangle-down' title='downvote' (click)='downvotePost(post)'></div>   
+                        <div class='triangle-up' title='upvote' (click)='canVote(post) ? upvotePost(post): false'> </div>
+                        <div class='triangle-down' title='downvote' (click)='canVote(post) ? downvotePost(post): false'></div>
                     </div>
                     <div class="row">
                         <p id='voteNum1'>{{post["upvote"]}}</p>
                         <p id='voteNum2'>{{post["downvote"]}}</p>
                     </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <button class="btn btn-dark float-right" [id]="post['id']"  (click)='openComment(post["id"])'>
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chat-square-dots-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                            comment
+                        </button>
+                    </div>
+                </div>
+                <div *ngIf="proxyObject['id'] == post['id'] && proxyObject['expanded']">
+                    <app-comment [parentPostId]='post["id"]'>
+                    </app-comment>
                 </div>
             </div>
         </div>
     </div>
 </div>
-    
-    
-    

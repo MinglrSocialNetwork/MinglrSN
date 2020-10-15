@@ -14,6 +14,7 @@ import { CommentComponent } from './comment/comment.component';
 import { SearchComponent } from './search/search.component';
 import { PosthistoryComponent } from './posthistory/posthistory.component';
 import { PersonalpageComponent } from './personalpage/personalpage.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { PersonalpageComponent } from './personalpage/personalpage.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AjaxService],
+  providers: [AjaxService, AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
